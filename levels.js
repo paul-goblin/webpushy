@@ -40,6 +40,8 @@ var loadLevels = function()
     g.lvlStart.field[l][10][9].gObject = "box";
     g.lvlStart.field[l][10][10].gObject = "box";
 
+	
+	
     g.lvlStart.field[l][9][10].gObject = "box";
 
     g.lvlStart.field[l][5][1].gObject = "box";
