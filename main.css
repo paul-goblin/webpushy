@@ -1,0 +1,317 @@
+body
+{
+	background: #f2f2f2;
+	margin: 0;
+	padding: 0;
+	line-height: 2em;
+	position: relative;
+	min-height: 100%;
+	cursor: default;
+	overscroll-behavior: contain;
+}
+
+br
+{
+	line-height: 150%;
+}
+
+*
+{
+	box-sizing: border-box;
+}
+
+#wrapper
+{
+	max-width: 1000px;
+	margin: 0 auto;
+	background: #ada;
+	padding: 10px;
+	color: #002;
+}
+
+.gScreen
+{
+	width: 100%;
+	position: relative;
+}
+
+.gScreen.IDmainMenu .startHeader
+{
+	width: 90%;
+	margin: 10px auto;
+	font-size: 35px;
+	text-align: center;
+	background-color: #dfd;
+	border: 5px solid #3f3;
+	border-radius: 0 10px 0 10px;
+}
+
+.gButton, .gLabel, .gUserSelection, .gLevelSelection
+{
+	width: 90%;
+	min-height: 20px;
+	margin: 10px auto;
+	font-size: 20px;
+	text-align: center;
+	background-color: #dfd;
+	border: 5px solid #3f3;
+	border-radius: 0 10px 0 10px;
+}
+
+.gLevelSelection.IDlevelSelect ul
+{
+	margin-left: 0;
+	padding-left: 0;
+	list-style-type: none;
+	height: 300px;
+	overflow: auto;
+}
+
+.gLevelSelection.IDlevelSelect ul li:nth-child( odd )
+{
+	background-color: #cfc;
+}
+
+.gGrid.IDfield
+{
+	width: 90%;
+	min-height: 20px;
+	margin: 10px auto;
+	background-color: #ddd;
+	border: 5px solid #aaa;
+}
+
+.gGrid.IDfield .cellStyleDiv
+{
+	width: 90%;
+	height: 90%;
+	left: 5%;
+	top: 5%;
+	background-color: #eee;
+}
+
+.gGrid.IDfield .cellStyleDiv.wall::after
+{
+	content: "";
+	background-image: url( "cell_pictures/wall.jpg" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid.IDfield .cellStyleDiv.pushy.facingLeft::after
+{
+	content: "";
+	background-image: url( "cell_pictures/pushyFacingLeft.png" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid.IDfield .cellStyleDiv.pushy.facingRight::after
+{
+	content: "";
+	background-image: url( "cell_pictures/pushyFacingRight.png" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid.IDfield .cellStyleDiv.pushy.facingUp::after
+{
+	content: "";
+	background-image: url( "cell_pictures/pushyFacingUp.png" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid.IDfield .cellStyleDiv.pushy.facingDown::after
+{
+	content: "";
+	background-image: url( "cell_pictures/pushyFacingDown.png" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid.IDfield .cellStyleDiv.pushy::after
+{
+	content: "";
+	background-image: url( "cell_pictures/pushy.png" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid.IDfield .cellStyleDiv.box::after
+{
+	content: "";
+	background-image: url( "cell_pictures/box.jpg" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid.IDfield .cellStyleDiv.red.ball::after
+{
+	content: "";
+	background-image: url( "cell_pictures/redBall.png" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid.IDfield .cellStyleDiv.blue.ball::after
+{
+	content: "";
+	background-image: url( "cell_pictures/blueBall.png" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid.IDfield .cellStyleDiv.green.ball::after
+{
+	content: "";
+	background-image: url( "cell_pictures/greenBall.png" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid.IDfield .cellStyleDiv.red.hole
+{
+	background-image: url( "cell_pictures/redHole.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.blue.hole
+{
+	background-image: url( "cell_pictures/blueHole.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.green.hole
+{
+	background-image: url( "cell_pictures/greenHole.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.red.colorBlur
+{
+	background-image: url( "cell_pictures/redColorField.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.blue.colorBlur
+{
+	background-image: url( "cell_pictures/blueColorField.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.green.colorBlur
+{
+	background-image: url( "cell_pictures/greenColorField.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.forbiddenTrigger
+{
+	background-image: url( "cell_pictures/forbiddenTrigger.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.forbidden
+{
+	background-image: url( "cell_pictures/forbidden.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.house
+{
+	background-image: url( "cell_pictures/house.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.apple
+{
+	background-image: url( "cell_pictures/apple.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.portal
+{
+	background-image: url( "cell_pictures/portal.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.lever
+{
+	background-image: url( "cell_pictures/lever.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.leverWall
+{
+	background-image: url( "cell_pictures/leverWall.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.leverWall.open
+{
+	background-image: url( "cell_pictures/leverWallOpen.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}

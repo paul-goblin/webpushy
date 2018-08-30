@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<!-- head -->
+<head>
+
+	<!-- tjsgf -->
+	<link href="tjsgf/tjsgf.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="tjsgf/tjsgf.js"></script>
+	<script type="text/javascript" src="tjsgf/jquery/jquery-3.3.1.min.js"></script>
+	
+	<!-- meta -->	
+	<meta charset="UTF8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" />
+	<title>Pushy</title>
+
+	<!-- styles -->
+	<link href="main.css" rel="stylesheet" type="text/css">
+
+</head>
+
+
+<!-- body -->
+<body>
+
+<!-- wrapper -->
+<div id="wrapper">
+
+	<div class="gScreen TYPEstart IDmainMenu hide">
+		<div class="startHeader">Welcome to WebPushy!</div>
+		<div class="gButton IDtoLevelSelect">Select level</div>
+		<div class="gButton IDstartGame">Continue game</div>
+		<div class="gButton IDstartNewGame">Start new game</div>
+	</div>
+
+	<div class="gScreen TYPEdefault IDlevelSelect hide">
+		<div class="gLevelSelection IDlevelSelect GRIDfield"></div>
+		<div class="gButton IDstartGame">Play!</div>
+		<div class="gButton IDtoMainMenu">Back to main menu</div>
+	</div>
+
+	<div class="gScreen TYPEdefault IDgame hide">
+		<div class="gLabel IDlevel"></div>
+		<div class="gGrid IDfield COLUMNS16 ROWS12 LEVELS20 KEYDOWNLISTENERtrue SWIPELISTENERtrue"></div>
+		<div class="gButton IDrestartLevel">Restart level</div>
+		<div class="gButton IDtoMainMenu">Back to main menu</div>
+	</div>
+
+<!-- wrapper -->
+</div>
+
+
+<!-- script -->
+<script type="text/javascript" src="levelFunctions.js"></script>
+<script type="text/javascript" src="levels.js"></script>
+
+</body>
+</html>
+
