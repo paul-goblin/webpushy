@@ -250,10 +250,45 @@ var loadLevels = function()
     }
 
     //Pushy + Haus
-    g.lvlStart.field[l][14][1].gObject = "pushy";
+    g.lvlStart.field[l][6][4].gObject = "pushy";
     g.lvlStart.field[l][1][10].gObject = "house";
 
     //other
+    g.lvlStart.field[l][3][2].gObject = "wall";
+    g.lvlStart.field[l][3][3].gObject = "wall";
+    g.lvlStart.field[l][2][3].gObject = "wall";
+    g.lvlStart.field[l][1][3].gObject = "wall";
+    g.lvlStart.field[l][1][5].gObject = "wall";
+    g.lvlStart.field[l][3][5].gObject = "wall";
+    g.lvlStart.field[l][5][1].gObject = "wall";
+    g.lvlStart.field[l][5][2].gObject = "wall";
+    g.lvlStart.field[l][5][3].gObject = "wall";
+    g.lvlStart.field[l][6][3].gObject = "wall";
+    g.lvlStart.field[l][5][5].gObject = "wall";
+    g.lvlStart.field[l][5][7].gObject = "wall";
+    g.lvlStart.field[l][3][7].gObject = "wall";
+    g.lvlStart.field[l][1][7].gObject = "wall";
+    for ( var r = 3; r < 11; r++ )
+    {
+        g.lvlStart.field[l][7][r].gObject = "wall";
+    }
+
+    g.lvlStart.field[l][4][2] = {gObject : "hole", objType : "red"};
+    g.lvlStart.field[l][4][3].gObject = "boxField";
+    g.lvlStart.field[l][4][4].gObject = "box";
+    g.lvlStart.field[l][5][6] = {gObject : "ball", objType : "red"};
+    g.lvlStart.field[l][4][5] = {gObject : "colorBlur", objType : "blue"};
+    g.lvlStart.field[l][3][6] = {gObject : "colorBlur", objType : "green"};
+    g.lvlStart.field[l][2][2].gObject = "apple";
+    g.lvlStart.field[l][1][2].gObject = "apple";
+    g.lvlStart.field[l][2][1].gObject = "apple";
+    g.lvlStart.field[l][1][1].gObject = "apple";
+    g.lvlStart.field[l][3][1] = {gObject : "leverWall", objType : "closed"};
+    g.lvlStart.field[l][3][4] = {gObject : "lever", active : false};
+
+
+    g.lvlStart.field[l][4][1].gObject = "portal";
+    g.lvlStart.field[l][1][4].gObject = "portal";
 
 
 

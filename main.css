@@ -315,3 +315,12 @@ br
     width: 90%; 
     height: 90%;
 }
+
+.gGrid.IDfield .cellStyleDiv.boxField
+{
+	background-image: url( "cell_pictures/boxField.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}

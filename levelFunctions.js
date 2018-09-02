@@ -115,13 +115,9 @@ var gameFunctions = {
 
         if ( arg.requestingObject.objName == "ball" && arg.requestingObject.objType == gObject.objType )
         {
-            success = true;
             arg.removeObjects.push( arg.requestingObject );
         }
-        else if ( arg.requestingObject.objName == "pushy" )
-        {
-            success = true;
-        }
+        success = true;
 
         return success;
     },
@@ -132,14 +128,10 @@ var gameFunctions = {
 
         if ( arg.requestingObject.objName == "ball" )
         {
-            success = true;
             arg.requestingObject.objType = gObject.objType;
             arg.removeObjects.push( gObject );
         }
-        else if ( arg.requestingObject.objName == "pushy" )
-        {
-            success = true;
-        }
+        success = true;
 
         return success;
     },
@@ -240,6 +232,7 @@ var gameFunctions = {
         {
             var objNameArray = [ "ball", "apple", ];
             var objExists = false;
+
             for ( var i = 0; i < objNameArray.length; i++ )
             {
                 if ( gObject.game.gObjects.hasOwnProperty( objNameArray[i] ) )
@@ -250,6 +243,31 @@ var gameFunctions = {
                     }
                 }
             }
+
+            if ( gObject.game.gObjects.hasOwnProperty( "boxField" ) )
+            {
+                for ( var i = 0; i < gObject.game.gObjects.boxField.length; i++ )
+                {
+                    var element = gObject.game.gObjects.boxField[ i ];
+                    var boxFieldCellEntries = cellData[ element.column ][ element.row ];
+                    if ( boxFieldCellEntries.length == 1 )
+                    {
+                        objExists = true;
+                    }
+                    else
+                    {
+                        for ( var objI = 0; objI < boxFieldCellEntries.length; objI++ )
+                        {
+                            if ( boxFieldCellEntries[ objI ].objName != "box" && boxFieldCellEntries[ objI ].objName != "boxField" )
+                            {
+                                objExists = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+
             if ( !objExists )
             {
                 arg.loadNextLevel = true;
