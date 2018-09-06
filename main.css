@@ -327,17 +327,17 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.oneWay.facingLeft
+.gGrid.IDfield .cellStyleDiv.oneWay.left
 {
 	
-	background-image: url( "cell_pictures/oneWayFacingLeft.png" ).onload ;
+	background-image: url( "cell_pictures/oneWayFacingLeft.png" ) ;
 	background-size: 100% 100%;
 	display: inline-block;
     width: 90%; 
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.oneWayFacingRight
+.gGrid.IDfield .cellStyleDiv.oneWay.right
 {	
 	background-image: url( "cell_pictures/oneWayFacingRight.png" ) ;
 	background-size: 100% 100%;
@@ -346,7 +346,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.oneWay.facingUp.onload
+.gGrid.IDfield .cellStyleDiv.oneWay.up
 {	
 	background-image: url( "cell_pictures/oneWayFacingUp.png" ) ;
 	background-size: 100% 100%;
@@ -355,18 +355,8 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.oneWay.facingDown.onLoad
+.gGrid.IDfield .cellStyleDiv.oneWay.down
 {	
-	background-image: url( "cell_pictures/oneWayFacingDown.png" ) ;
-	background-size: 100% 100%;
-	display: inline-block;
-    width: 90%; 
-    height: 90%;
-    transform: rotate(180deg);
-}
-
-.gGrid.IDfield .cellStyleDiv.oneWay
-{
 	background-image: url( "cell_pictures/oneWayFacingDown.png" ) ;
 	background-size: 100% 100%;
 	display: inline-block;

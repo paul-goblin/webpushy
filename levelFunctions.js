@@ -86,63 +86,16 @@ var gameFunctions = {
         }
         return success;
     },
-/*    V1 short ohne onload*/ //gesamt
+
     oneWayAction : function( cellData, gObject, arg )
     {
         var success = false;
-        if ( gObject.objType == "up" && arg.requestingObject.row > gObject.row)
+
+        if ( gObject.objType == arg.direction.toLowerCase() )
         {
             success = true;
         }
-        if ( gObject.objType == "left" && arg.requestingObject.column > gObject.column)
-        {
-            success = true;
-        }
-        if ( gObject.objType == "down" && arg.requestingObject.row < gObject.row)
-        {
-            success = true;
-        }
-        if ( gObject.objType == "right" && arg.requestingObject.column < gObject.column)
-        {
-            success = true;
-        }
-        return success;
-    },
-    //einzelnd V2
-    oneWayFacingRightAction : function( cellData, gObject, arg )
-    {
-        var success = false;
-        if ( gObject.objType == "right" && arg.requestingObject.column < gObject.column)
-        {
-            success = true;
-        }
-        return success;
-    },
-    oneWayFacingLeftAction : function( cellData, gObject, arg )
-    {
-        var success = false;
-        if ( gObject.objType == "left" && arg.requestingObject.column > gObject.column)
-        {
-            success = true;
-        }
-        return success;
-    },
-    oneWayFacingUpAction : function( cellData, gObject, arg )
-    {
-        var success = false;
-        if ( gObject.objType == "up" && arg.requestingObject.row > gObject.row)
-        {
-            success = true;
-        }
-        return success;
-    },
-    oneWayFacingDownAction : function( cellData, gObject, arg )
-    {
-        var success = false;
-        if ( gObject.objType == "down" && arg.requestingObject.row < gObject.row)
-        {
-            success = true;
-        }
+        
         return success;
     },
 
