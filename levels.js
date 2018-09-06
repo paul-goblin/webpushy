@@ -3,8 +3,30 @@
 var loadLevels = function()
 {
 
+
+    var l = 1; //LVL 1 ÜBERSCHRIBEN HIERMIT, SPÄTER ÄNDERN
+
+    g.lvlStart.field[l][10][4].gObject = "pushy";
+    g.lvlStart.field[l][1][10].gObject = "house";
+    g.lvlStart.field[l][10][7].gObject = "box";
+    g.lvlStart.field[l][9][7].gObject = "wall";
+    //Version 2
+    g.lvlStart.field[l][6][5] = {gObject : "oneWayFacingDown", objType : "down"}; //not working //und ich weiß net warum bzw !unsichtbar! //doch weiß warum : die css Datei ganz unten ist ein kleine caos was das grüne angeht (endungen beachten)
+    g.lvlStart.field[l][5][4].gObject = "oneWay"; // nur ein Testblock , hat keine fkt zugeteilt
+    g.lvlStart.field[l][4][3] = {gObject : "oneWayFacingRight", objType : "right"}; //working //funktion nach oneWayFacingRightAction
+    g.lvlStart.field[l][2][2] = {gObject : "oneWayFacingLeft", objType : "left"};
+
+
+
+    //Version 1
+    g.lvlStart.field[l][8][3] = {gObject : "oneWay", objType : "up"};   //funktion nach oneWayAction
+    g.lvlStart.field[l][9][4] = {gObject : "oneWay", objType : "left"}; //ich wusste net wie du die am anfang mit onload ausrichten willst
+    g.lvlStart.field[l][10][5] = {gObject : "oneWay", objType : "right"};// Grafik zeigt nur oneWay an ohne .right od .left od.....
+    g.lvlStart.field[l][11][6] = {gObject : "oneWay", objType : "down"}; //die Version währe schön wenn du onload irgendwo richtig hinschreibst (ich weiß es net)
+
+
 //************************************************************************************************************************************************************************************************************************
-    var l = 1; // L wie level, damit man level leicht neu nummerieren kann
+    var l = 0; // L wie level, damit man level leicht neu nummerieren kann
 //************************************************************************************************************************************************************************************************************************
 
     //border

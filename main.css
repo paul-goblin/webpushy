@@ -150,6 +150,8 @@ br
     height: 100%;
 }
 
+
+
 .gGrid.IDfield .cellStyleDiv.box::after
 {
 	content: "";
@@ -319,6 +321,53 @@ br
 .gGrid.IDfield .cellStyleDiv.boxField
 {
 	background-image: url( "cell_pictures/boxField.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.oneWay.facingLeft
+{
+	
+	background-image: url( "cell_pictures/oneWayFacingLeft.png" ).onload ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.oneWayFacingRight
+{	
+	background-image: url( "cell_pictures/oneWayFacingRight.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.oneWay.facingUp.onload
+{	
+	background-image: url( "cell_pictures/oneWayFacingUp.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid.IDfield .cellStyleDiv.oneWay.facingDown.onLoad
+{	
+	background-image: url( "cell_pictures/oneWayFacingDown.png" ) ;
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+    transform: rotate(180deg);
+}
+
+.gGrid.IDfield .cellStyleDiv.oneWay
+{
+	background-image: url( "cell_pictures/oneWayFacingDown.png" ) ;
 	background-size: 100% 100%;
 	display: inline-block;
     width: 90%; 
