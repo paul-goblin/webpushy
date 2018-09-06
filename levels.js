@@ -322,14 +322,55 @@ var loadLevels = function()
         g.lvlStart.field[l][15][r].gObject = "wall";
     }
 
+
+    //other
+    for ( var c = 1; c < 15 ; c ++ ) 
+    {
+        for ( var r = 1; r < 11; r++ )
+        {
+            g.lvlStart.field[l][c][r] = {gObject : "oneWay", objType : "up"};
+            if ( c + r > 13 )
+            {
+                g.lvlStart.field[l][c][r].objType = "down"
+            }  
+        }
+    }
+
+    g.lvlStart.field[l][13][1].objType = "left";
+    g.lvlStart.field[l][12][1].objType = "left";
+    g.lvlStart.field[l][11][1].objType = "left";
+    g.lvlStart.field[l][11][2].objType = "down";
+    g.lvlStart.field[l][11][3].objType = "down";
+    g.lvlStart.field[l][12][3].objType = "right";
+    g.lvlStart.field[l][12][4].objType = "down";
+    g.lvlStart.field[l][12][5].objType = "down";
+    g.lvlStart.field[l][11][5].objType = "left";
+    g.lvlStart.field[l][10][5].objType = "left";
+    g.lvlStart.field[l][9][5].objType = "left";
+    g.lvlStart.field[l][9][6].objType = "down";
+    g.lvlStart.field[l][9][7].objType = "down";
+    g.lvlStart.field[l][8][7].objType = "left";
+    g.lvlStart.field[l][7][7].objType = "left";
+    g.lvlStart.field[l][6][7].objType = "left";
+    g.lvlStart.field[l][6][6].objType = "up";
+    g.lvlStart.field[l][6][5].objType = "up";
+    g.lvlStart.field[l][6][4].objType = "up";
+    g.lvlStart.field[l][5][4].objType = "left";
+    g.lvlStart.field[l][4][4].objType = "left";
+    g.lvlStart.field[l][3][4].objType = "left";
+    g.lvlStart.field[l][3][5].objType = "down";
+    g.lvlStart.field[l][3][6].objType = "down";
+    g.lvlStart.field[l][4][6].objType = "right";
+    g.lvlStart.field[l][4][7].objType = "down";
+    g.lvlStart.field[l][4][8].objType = "down";
+    g.lvlStart.field[l][4][9].objType = "down";
+    g.lvlStart.field[l][3][9].objType = "left";
+    g.lvlStart.field[l][2][9].objType = "left";
+    g.lvlStart.field[l][2][10].objType = "down";
+
     //Pushy + Haus
     g.lvlStart.field[l][14][1].gObject = "pushy";
     g.lvlStart.field[l][1][10].gObject = "house";
-
-    //other
-
-
-
 
 
 //************************************************************************************************************************************************************************************************************************
