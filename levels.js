@@ -4,7 +4,7 @@ var loadLevels = function()
 {
 
 
-    var l = 1; //LVL 1 ÜBERSCHRIBEN HIERMIT, SPÄTER ÄNDERN #PS.: es gibt noch das lvl 0
+    var l = 0; //LVL 1 ÜBERSCHRIBEN HIERMIT, SPÄTER ÄNDERN #PS.: es gibt noch das lvl 0
 
     g.lvlStart.field[l][10][4].gObject = "pushy";
     g.lvlStart.field[l][1][10].gObject = "house";
@@ -18,7 +18,7 @@ var loadLevels = function()
 
 
 //************************************************************************************************************************************************************************************************************************
-    var l = 0; // L wie level, damit man level leicht neu nummerieren kann
+    var l = 1; // L wie level, damit man level leicht neu nummerieren kann
 //************************************************************************************************************************************************************************************************************************
 
     //border
@@ -515,8 +515,85 @@ var loadLevels = function()
     g.lvlStart.field[l][1][3] = {gObject : "lever", active : false};
     g.lvlStart.field[l][10][4].gObject = "box";
 
+//************************************************************************************************************************************************************************************************************************
+    var l = 10;
+//************************************************************************************************************************************************************************************************************************
+    for ( var c = 0; c < 16 ; c ++ ) 
+    {
+        if(c==4){c=5;}
+        g.lvlStart.field[l][c][0].gObject = "box";
+        g.lvlStart.field[l][c][11].gObject = "box";
+    }
+    for ( var r = 0; r < 12; r++ )
+    {
+        if(r == 8)
+        {
+            r = 9;
+        }
+        g.lvlStart.field[l][0][r].gObject = "box";
+        g.lvlStart.field[l][15][r].gObject = "box";
+    }
+    for(var t = 4; t<15; t++)
+    {
+        g.lvlStart.field[l][t][5] = {gObject : "oneWay", objType : "down"};
+    }
+    g.lvlStart.field[l][1][5] = {gObject : "oneWay", objType : "down"};
+    g.lvlStart.field[l][2][5] = {gObject : "oneWay", objType : "right"};
+    g.lvlStart.field[l][3][5] = {gObject : "oneWay", objType : "up"};
+    g.lvlStart.field[l][3][7] = {gObject : "oneWay", objType : "left"};
+    g.lvlStart.field[l][4][0] = {gObject : "oneWay", objType : "down"};
+    g.lvlStart.field[l][4][11] = {gObject : "oneWay", objType : "down"};
+    g.lvlStart.field[l][4][10] = {gObject : "oneWay", objType : "left"};
+    g.lvlStart.field[l][1][6] = {gObject : "oneWay", objType : "down"};
+
+    g.lvlStart.field[l][0][8] = {gObject : "oneWay", objType : "left"};
+    g.lvlStart.field[l][8][9] = {gObject : "oneWay", objType : "left"};
+
+    g.lvlStart.field[l][4][8] = {gObject : "oneWay", objType : "down"};
+    g.lvlStart.field[l][4][6] = {gObject : "oneWay", objType : "down"};
+    g.lvlStart.field[l][4][7] = {gObject : "oneWay", objType : "down"};
+
+    g.lvlStart.field[l][7][1].gObject = "wall";
+    g.lvlStart.field[l][7][2].gObject = "wall";
+    g.lvlStart.field[l][7][4].gObject = "wall";
+    g.lvlStart.field[l][7][3] = {gObject : "oneWay", objType : "right"};
+    g.lvlStart.field[l][8][3] = {gObject : "oneWay", objType : "right"};
+
+    g.lvlStart.field[l][14][1].gObject = "pushy";
+    g.lvlStart.field[l][1][10].gObject = "house";
+    g.lvlStart.field[l][8][10] = {gObject : "portal"};
+    g.lvlStart.field[l][2][1] = {gObject : "portal"};
+
+    
+    g.lvlStart.field[l][15][8].gObject = "box";
+    g.lvlStart.field[l][1][1].gObject = "box";
+
+    g.lvlStart.field[l][10][2] = {gObject : "ball", objType : "green"};
+    g.lvlStart.field[l][1][2] = {gObject : "hole", objType : "blue"};
+    g.lvlStart.field[l][12][8] = {gObject : "colorBlur", objType : "blue"};
+
+    g.lvlStart.field[l][11][8] = {gObject : "colorBlur", objType : "red"};
+    g.lvlStart.field[l][13][8] = {gObject : "colorBlur", objType : "red"};
+    g.lvlStart.field[l][12][9] = {gObject : "colorBlur", objType : "red"};
 
 
+    g.lvlStart.field[l][2][2] = {gObject : "leverWall", objType : "closed"};
+    g.lvlStart.field[l][2][3] = {gObject : "leverWall", objType : "closed"};
+    g.lvlStart.field[l][1][3] = {gObject : "leverWall", objType : "closed"};
+
+
+    g.lvlStart.field[l][8][6] = {gObject : "lever", active : false};
+    g.lvlStart.field[l][7][6].gObject = "wall";
+    g.lvlStart.field[l][9][6].gObject = "wall";
+    g.lvlStart.field[l][8][7].gObject = "wall";
+    g.lvlStart.field[l][11][7].gObject = "wall";
+    g.lvlStart.field[l][13][7].gObject = "wall";
+    g.lvlStart.field[l][13][9].gObject = "wall";
+    g.lvlStart.field[l][11][9].gObject = "wall";
+    g.lvlStart.field[l][8][8].gObject = "wall";
+    g.lvlStart.field[l][10][10].gObject = "wall";
+
+    g.lvlStart.field[l][10][6].gObject = "apple";
 
 }
 
