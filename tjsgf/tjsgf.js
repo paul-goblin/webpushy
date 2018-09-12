@@ -20,6 +20,7 @@ var game = function()
     this.vars = {};
 
     this.cellData = {};
+    this.cellDataUndo = {};
 
     this.gObjects = {};
     this.keyDownEffectedObjects = {};
@@ -377,6 +378,16 @@ game.prototype.keyDownHandler = function( event, gGridId )
     }
 }
 
+game.prototype.undo = function( gGridId )
+{
+    // if ( this.cellDataUndo.hasOwnProperty( gGridId ) )
+    // {
+    //     console.log( this.cellDataUndo[ gGridId ][ 13 ][ 2 ][0] );
+    //     this.cellData[ gGridId ] = jQuery.extend( true, {}, this.cellDataUndo[ gGridId ] );
+    //     this.renderGrid( gGridId );
+    // }
+}
+
 game.prototype.setupTools = function()
 {
     var gToolbarsCollection = document.querySelectorAll( '.gToolbar' );
@@ -593,6 +604,8 @@ game.prototype.gObject.prototype.action = function( cellData, arg )
     {
         this.arg.depth = 0;
         this.firstAction = true;
+        this.game.cellDataUndo[ this.gGridId ] = jQuery.extend( true, {}, cellData );
+        console.log( cellData );
     }
     if ( !this.arg.hasOwnProperty("removeObjects") )
     {
@@ -775,6 +788,7 @@ game.prototype.getClassValueFromClassName = function( target, classType = "ID", 
 
 game.prototype.renderGrid = function( gGridId )
 {
+    console.log( this.cellData[ gGridId ][ 13 ][ 2 ][0] );
     for (var column = 0; column < this.cellData[ gGridId ].length; column++)
     {
         for (var row = 0; row < this.cellData[ gGridId ][ column ].length; row++)

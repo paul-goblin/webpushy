@@ -7,6 +7,11 @@ var gameFunctions = {
         g.changeScreens( "game" );
     },
 
+    undoMove : function()
+    {
+        g.undo( "field" );
+    },
+
     startNewGame : function()
     {
         g.nextLevel.field = 1;
