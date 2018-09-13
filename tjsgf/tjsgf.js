@@ -26,7 +26,6 @@ var game = function()
     this.keyDownEffectedObjects = {};
     this.swipeEffectedObjects = [];
 
-    this.levelClasses = {}; //old
     this.lvlStart = {};
 
     this.nextLevel = {};
@@ -207,6 +206,7 @@ game.prototype.setupGrids = function()
         this.grids[ gGridId ] = gGridsCollection[i];
         this.styleCells[ gGridId ] = [];
         this.cellData[ gGridId ] = [];
+        this.cellDataUndo[ gGridId ] = [];
 
         columns = this.getClassValueFromClassName( gGridsCollection[i], "COLUMNS" );
         rows = this.getClassValueFromClassName( gGridsCollection[i], "ROWS" );
@@ -262,6 +262,7 @@ game.prototype.setupGrids = function()
                 {
                     this.styleCells[ gGridId ][ column ] = [];
                     this.cellData[ gGridId ][ column ] = [];
+                    this.cellDataUndo[ gGridId ][ column ] = [];
                 }
 
                 (function(gGridIdCopy){
@@ -271,6 +272,7 @@ game.prototype.setupGrids = function()
                     sizeDiv.addEventListener( 'click', function(){ return window.gameFunctions.handleClickOnCell(  gGridIdCopy, columnCopy, rowCopy, this.querySelector( ".cellStyleDiv" ) ) } );
                     thisCopy.styleCells[ gGridId ][ column ][ row ] = sizeDiv.querySelector( ".cellStyleDiv" );
                     thisCopy.cellData[ gGridId ][ column ][ row ] = [];
+                    thisCopy.cellDataUndo[ gGridId ][ column ][ row ] = {};
                 })(gGridId);
             }
         }
@@ -504,17 +506,35 @@ game.prototype.toolOnclick = function( gToolbarId, gToolId, gTool )
     }
 }
 
-
 game.prototype.loadNextLevel = function( gGridId )
 {
-    this.gObjects = {};
-    for (var column = 0; column < this.styleCells[ gGridId ].length; column++)
+    this.loadIntoCellData( gGridId, this.lvlStart[ gGridId ][ this.nextLevel[ gGridId ] ] )
+
+    if ( typeof window.gameFunctions.levelLoadAction === "function" )
+    { 
+        window.gameFunctions.levelLoadAction( this, gGridId );
+    }
+
+    localStorage.setItem( "currentLevel_" + gGridId, this.nextLevel[ gGridId ] );
+    if ( this.nextLevel[ gGridId ] > this.maxLevel[ gGridId ] )
     {
-        for (var row = 0; row < this.styleCells[ gGridId ][ column ].length; row++)
+        this.maxLevel[ gGridId ] = this.nextLevel[ gGridId ];
+        localStorage.setItem( "maxLevel_" + gGridId, this.maxLevel[ gGridId ] );
+    }
+
+    this.renderGrid( gGridId );
+    this.nextLevel[ gGridId ]++;
+}
+
+game.prototype.loadIntoCellData = function( gGridId, simpleCellData )
+{
+    this.gObjects = {};
+    for ( var column = 0; column < this.styleCells[ gGridId ].length; column++ )
+    {
+        for ( var row = 0; row < this.styleCells[ gGridId ][ column ].length; row++ )
         {
             this.cellData[ gGridId ][ column ][ row ] = [];
-            var className = "cellStyleDiv ";
-            var lvlCell = this.lvlStart[ gGridId ][ this.nextLevel[ gGridId ] ][ column ][ row ];
+            var lvlCell = simpleCellData[ column ][ row ];
 
             if ( lvlCell.hasOwnProperty("objName") )
             {
@@ -527,7 +547,7 @@ game.prototype.loadNextLevel = function( gGridId )
 
                 for ( var userProp in lvlCell )
                 {
-                    if ( userProp != "objName" )
+                    if ( userProp != "objName" && userProp != "objName2" && userProp.substring( 0, 3 ) == "obj" && userProp.slice( -1 ) != "2" )
                     {
                         instance[ userProp ] = lvlCell[ userProp ];
                     }
@@ -536,25 +556,60 @@ game.prototype.loadNextLevel = function( gGridId )
                 this.gObjects[ lvlCell.objName ].push( instance );
                 this.cellData[ gGridId ][ column ][ row ].push( instance );
             }
+
+            if ( lvlCell.hasOwnProperty("objName2") )
+            {
+                if ( !this.gObjects.hasOwnProperty( lvlCell.objName2 ) )
+                {
+                    this.gObjects[ lvlCell.objName2 ] = [];
+                }
+
+                var instance = new this.gObject( lvlCell.objName2, column, row, this.renderGrid, gGridId, this );
+
+                for ( var userProp in lvlCell )
+                {
+                    if ( userProp != "objName" && userProp != "objName2" && userProp.substring( 0, 3 ) == "obj" && userProp.slice( -1 ) == "2" )
+                    {
+                        instance[ userProp.slice( 0, -1 ) ] = lvlCell[ userProp ];
+                    }
+                }
+
+                this.gObjects[ lvlCell.objName2 ].push( instance );
+                this.cellData[ gGridId ][ column ][ row ].push( instance );
+            }
         }
     }
-    if ( typeof window.gameFunctions.levelLoadAction === "function" )
-    { 
-        window.gameFunctions.levelLoadAction( this, gGridId );
-    }
-    this.renderGrid( gGridId );
-    localStorage.setItem( "currentLevel_" + gGridId, this.nextLevel[ gGridId ] );
-    if ( this.nextLevel[ gGridId ] > this.maxLevel[ gGridId ] )
-    {
-        this.maxLevel[ gGridId ] = this.nextLevel[ gGridId ];
-        localStorage.setItem( "maxLevel_" + gGridId, this.maxLevel[ gGridId ] );
-    }
-
-
-    this.nextLevel[ gGridId ]++;
 }
 
+game.prototype.getSimpleCellData = function( gGridId )
+{
+    var simpleCellData = [];
 
+    for ( var column = 0; column < this.styleCells[ gGridId ].length; column++ )
+    {
+        simpleCellData[ column ] = [];
+
+        for ( var row = 0; row < this.styleCells[ gGridId ][ column ].length; row++ )
+        {
+            simpleCellData[ column ][ row ] = [];
+            var cellObjs = this.cellData[ gGridId ][ column ][ row ];
+
+            for( var obj = 0; obj < cellObjs.length; obj++ )
+            {
+                for ( var prop in obj )
+                {
+
+
+                    if ( prop != "objName" && prop.substring( 0, 3 ) == "obj" )
+                    {
+
+                    }
+                }
+            }
+        }
+    }
+        
+}
 
 
 

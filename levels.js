@@ -4,7 +4,7 @@ var loadLevels = function()
 {
 
 
-    var l = 0; //LVL 1 ÜBERSCHRIBEN HIERMIT, SPÄTER ÄNDERN #PS.: es gibt noch das lvl 0
+    var l = 0;
 
     g.lvlStart.field[l][10][4].objName = "pushy";
     g.lvlStart.field[l][1][10].objName = "house";
@@ -35,6 +35,9 @@ var loadLevels = function()
 
     //Pushy + Haus
     g.lvlStart.field[l][14][1].objName = "pushy";
+    g.lvlStart.field[l][14][1].objName2 = "hole";
+    g.lvlStart.field[l][14][1].objType2 = "blue";
+
     g.lvlStart.field[l][1][10].objName = "house";
 
     //walls
@@ -611,42 +614,6 @@ var std = function()
     g.keyDownEffectedObjects.ArrowRight = [ "pushy" ];
 
     g.swipeEffectedObjects = [ "pushy" ];
-
-
-    // 0. Level als Test für neue Objekte, standardmäßig ignoriert
-
-    g.lvlStart.field[0][1][1].objName = "wall";
-
-    g.lvlStart.field[0][7][1] = {objName : "ball", objType : "red"};
-    g.lvlStart.field[0][7][4] = {objName : "ball", objType : "blue"};
-    g.lvlStart.field[0][7][7] = {objName : "ball", objType : "green"};
-
-    g.lvlStart.field[0][12][5] = {objName : "hole", objType : "blue"};
-    g.lvlStart.field[0][11][5] = {objName : "hole", objType : "green"};
-    g.lvlStart.field[0][10][5] = {objName : "hole", objType : "red"};
-
-    g.lvlStart.field[0][12][4] = {objName : "colorBlur", objType : "blue"};
-    g.lvlStart.field[0][11][4] = {objName : "colorBlur", objType : "green"};
-    g.lvlStart.field[0][10][4] = {objName : "colorBlur", objType : "red"};
-
-    g.lvlStart.field[0][5][5].objName = "box";
-    g.lvlStart.field[0][6][5].objName = "forbiddenTrigger";
-
-    g.lvlStart.field[0][3][4].objName = "pushy";
-
-    g.lvlStart.field[0][2][10].objName = "house";
-
-    g.lvlStart.field[0][13][5] = {objName : "apple"};
-
-    g.lvlStart.field[0][13][1] = {objName : "portal"};
-    g.lvlStart.field[0][1][10] = {objName : "portal"};
-
-    g.lvlStart.field[0][3][10] = {objName : "lever", objActive : false};
-    g.lvlStart.field[0][4][10] = {objName : "leverWall", objType : "closed"};
-    g.lvlStart.field[0][5][10] = {objName : "leverWall", objType : "closed"};
-
-
-
 
     loadLevels();
 
