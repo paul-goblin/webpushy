@@ -48,10 +48,10 @@ var gameFunctions = {
             var leverCellDataEntries = cellData[ lever.column ][ lever.row ].length;
             if ( leverCellDataEntries == 1 )
             {
-                lever.active = false;
+                lever.objActive = false;
             }
             
-            if ( lever.active )
+            if ( lever.objActive )
             {
                 startObject.game.gObjects.leverWall.forEach( function( element )
                 {
@@ -185,7 +185,7 @@ var gameFunctions = {
 
     leverAction : function( cellData, gObject, arg)
     {
-        gObject.active = true;
+        gObject.objActive = true;
         return true;
     },
 

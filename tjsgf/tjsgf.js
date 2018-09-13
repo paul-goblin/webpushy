@@ -226,7 +226,6 @@ game.prototype.setupGrids = function()
         levels =  this.getClassValueFromClassName( gGridsCollection[i], "LEVELS", 0 );
         if ( levels != 0 )
         {
-            this.levelClasses[ gGridId ] = [];
             this.lvlStart[ gGridId ] = [];
             this.nextLevel[ gGridId ] = 1;
             this.maxLevel[ gGridId ] = 1;
@@ -243,15 +242,12 @@ game.prototype.setupGrids = function()
 
             for (var level = 0; level < levels; level++)
             {
-                this.levelClasses[ gGridId ][ level ] = [];
                 this.lvlStart[ gGridId ][ level ] = [];
                 for (var column = 0; column < columns; column++)
                 {
-                    this.levelClasses[ gGridId ][ level ][ column ] = [];
                     this.lvlStart[ gGridId ][ level ][ column ] = [];
                     for (var row = 0; row < rows; row++)
                     {
-                        this.levelClasses[ gGridId ][ level ][ column ][ row ] = [];
                         this.lvlStart[ gGridId ][ level ][ column ][ row ] = {};
                     }
                 }
@@ -380,12 +376,7 @@ game.prototype.keyDownHandler = function( event, gGridId )
 
 game.prototype.undo = function( gGridId )
 {
-    // if ( this.cellDataUndo.hasOwnProperty( gGridId ) )
-    // {
-    //     console.log( this.cellDataUndo[ gGridId ][ 13 ][ 2 ][0] );
-    //     this.cellData[ gGridId ] = jQuery.extend( true, {}, this.cellDataUndo[ gGridId ] );
-    //     this.renderGrid( gGridId );
-    // }
+    
 }
 
 game.prototype.setupTools = function()
@@ -525,33 +516,26 @@ game.prototype.loadNextLevel = function( gGridId )
             var className = "cellStyleDiv ";
             var lvlCell = this.lvlStart[ gGridId ][ this.nextLevel[ gGridId ] ][ column ][ row ];
 
-            for (var levelClass = 0; levelClass < this.levelClasses[ gGridId ][ this.nextLevel[ gGridId ] ][ column ][ row ].length; levelClass++)
+            if ( lvlCell.hasOwnProperty("objName") )
             {
-                className += this.levelClasses[ gGridId ][ this.nextLevel[ gGridId ] ][ column ][ row ][ levelClass ] + " ";
-            }
-
-            if ( lvlCell.hasOwnProperty("gObject") )
-            {
-                if ( !this.gObjects.hasOwnProperty( lvlCell.gObject ) )
+                if ( !this.gObjects.hasOwnProperty( lvlCell.objName ) )
                 {
-                    this.gObjects[ lvlCell.gObject ] = [];
+                    this.gObjects[ lvlCell.objName ] = [];
                 }
 
-                var instance = new this.gObject( lvlCell.gObject, column, row, this.renderGrid, gGridId, this );
+                var instance = new this.gObject( lvlCell.objName, column, row, this.renderGrid, gGridId, this );
 
                 for ( var userProp in lvlCell )
                 {
-                    if ( userProp != "gObject" )
+                    if ( userProp != "objName" )
                     {
                         instance[ userProp ] = lvlCell[ userProp ];
                     }
                 }
 
-                this.gObjects[ lvlCell.gObject ].push( instance );
+                this.gObjects[ lvlCell.objName ].push( instance );
                 this.cellData[ gGridId ][ column ][ row ].push( instance );
             }
-
-            this.styleCells[ gGridId ][ column ][ row ].className = className;
         }
     }
     if ( typeof window.gameFunctions.levelLoadAction === "function" )
@@ -604,8 +588,6 @@ game.prototype.gObject.prototype.action = function( cellData, arg )
     {
         this.arg.depth = 0;
         this.firstAction = true;
-        this.game.cellDataUndo[ this.gGridId ] = jQuery.extend( true, {}, cellData );
-        console.log( cellData );
     }
     if ( !this.arg.hasOwnProperty("removeObjects") )
     {
@@ -788,7 +770,6 @@ game.prototype.getClassValueFromClassName = function( target, classType = "ID", 
 
 game.prototype.renderGrid = function( gGridId )
 {
-    console.log( this.cellData[ gGridId ][ 13 ][ 2 ][0] );
     for (var column = 0; column < this.cellData[ gGridId ].length; column++)
     {
         for (var row = 0; row < this.cellData[ gGridId ][ column ].length; row++)
