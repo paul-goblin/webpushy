@@ -25,20 +25,21 @@ br
 	max-width: 1000px;
 	margin: 0 auto;
 	background: #ada;
-	padding: 10px;
 	color: #002;
 }
 
 .gScreen
 {
-	width: 100%;
+	width: 90%;
+	margin: 10px auto;
+	padding: 10px 0;
 	position: relative;
 }
 
 .gScreen.IDmainMenu .startHeader
 {
-	width: 90%;
-	margin: 10px auto;
+	width: 100%;
+	margin: 10px 0;
 	font-size: 35px;
 	text-align: center;
 	background-color: #dfd;
@@ -48,9 +49,9 @@ br
 
 .gButton, .gLabel, .gUserSelection, .gLevelSelection
 {
-	width: 90%;
+	width: 100%;
+	margin: 10px 0;
 	min-height: 20px;
-	margin: 10px auto;
 	font-size: 20px;
 	text-align: center;
 	background-color: #dfd;
@@ -74,9 +75,9 @@ br
 
 .gGrid.IDfield
 {
-	width: 90%;
+	width: 100%;
 	min-height: 20px;
-	margin: 10px auto;
+	margin: 10px 0;
 	background-color: #ddd;
 	border: 5px solid #aaa;
 }
@@ -102,48 +103,28 @@ br
 
 .gGrid.IDfield .cellStyleDiv.pushy.facingLeft::after
 {
-	content: "";
-	background-image: url( "cell_pictures/pushyFacingLeft.png" ) ;
-	background-size: 100% 100%;
-	float: left;
-    width: 100%; 
-    height: 100%;
+	transform: rotate( 270deg );
 }
 
 .gGrid.IDfield .cellStyleDiv.pushy.facingRight::after
 {
-	content: "";
-	background-image: url( "cell_pictures/pushyFacingRight.png" ) ;
-	background-size: 100% 100%;
-	float: left;
-    width: 100%; 
-    height: 100%;
+	transform: rotate( 90deg )
 }
 
 .gGrid.IDfield .cellStyleDiv.pushy.facingUp::after
 {
-	content: "";
-	background-image: url( "cell_pictures/pushyFacingUp.png" ) ;
-	background-size: 100% 100%;
-	float: left;
-    width: 100%; 
-    height: 100%;
+	transform: rotate( 0deg );
 }
 
 .gGrid.IDfield .cellStyleDiv.pushy.facingDown::after
 {
-	content: "";
-	background-image: url( "cell_pictures/pushyFacingDown.png" ) ;
-	background-size: 100% 100%;
-	float: left;
-    width: 100%; 
-    height: 100%;
+	transform: rotate( 180deg );
 }
 
 .gGrid.IDfield .cellStyleDiv.pushy::after
 {
 	content: "";
-	background-image: url( "cell_pictures/pushy.png" ) ;
+	background-image: url( "cell_pictures/pushyFacingUp.png" ) ;
 	background-size: 100% 100%;
 	float: left;
     width: 100%; 
@@ -329,35 +310,26 @@ br
 
 .gGrid.IDfield .cellStyleDiv.oneWay.left
 {
-	
-	background-image: url( "cell_pictures/oneWayFacingLeft.png" ) ;
-	background-size: 100% 100%;
-	display: inline-block;
-    width: 90%; 
-    height: 90%;
+	transform: rotate( 270deg );
 }
 
 .gGrid.IDfield .cellStyleDiv.oneWay.right
 {	
-	background-image: url( "cell_pictures/oneWayFacingRight.png" ) ;
-	background-size: 100% 100%;
-	display: inline-block;
-    width: 90%; 
-    height: 90%;
+	transform: rotate( 90deg );
 }
 
 .gGrid.IDfield .cellStyleDiv.oneWay.up
 {	
-	background-image: url( "cell_pictures/oneWayFacingUp.png" ) ;
-	background-size: 100% 100%;
-	display: inline-block;
-    width: 90%; 
-    height: 90%;
+	transform: rotate( 0deg );
 }
 
 .gGrid.IDfield .cellStyleDiv.oneWay.down
 {	
-	background-image: url( "cell_pictures/oneWayFacingDown.png" ) ;
+	transform: rotate( 180deg );
+}
+.gGrid.IDfield .cellStyleDiv.oneWay
+{	
+	background-image: url( "cell_pictures/oneWayFacingUp.png" ) ;
 	background-size: 100% 100%;
 	display: inline-block;
     width: 90%; 

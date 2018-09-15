@@ -231,7 +231,7 @@ var gameFunctions = {
             arg.direction = arg.swipeDirection;
         }
             
-        gObject.classListAdd( "facing" + arg.direction );
+        gObject.objType = "facing" + arg.direction;
         var success = gObject.move( arg.direction );
 
         if ( success && gObject.objType == "forbiddenPushy" && cellData[ gObject.column ][ gObject.row ].length == 0 )

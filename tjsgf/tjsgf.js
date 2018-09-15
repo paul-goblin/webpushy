@@ -124,7 +124,7 @@ game.prototype.setupLevelSelections = function()
         var gLevelSelection = this.levelSelections[ gLevelSelectionId ];
 
         gLevelSelection.appendChild( div );
-        gLevelSelection.querySelector( ".selectedLevel" ).textContent = "Level " + (this.nextLevel[ gGridId ] - 1);
+        gLevelSelection.querySelector( ".selectedLevel" ).textContent = "Level " + ( this.nextLevel[ gGridId ] - 1 );
 
         for ( var level = 0; level  < this.getClassValueFromClassName( this.grids[ gGridId ], "LEVELS", 0 ); level++ )
         {
@@ -378,7 +378,8 @@ game.prototype.keyDownHandler = function( event, gGridId )
 
 game.prototype.undo = function( gGridId )
 {
-    
+    this.loadIntoCellData( gGridId, this.cellDataUndo )
+    this.renderGrid( gGridId );
 }
 
 game.prototype.setupTools = function()
@@ -591,23 +592,27 @@ game.prototype.getSimpleCellData = function( gGridId )
 
         for ( var row = 0; row < this.styleCells[ gGridId ][ column ].length; row++ )
         {
-            simpleCellData[ column ][ row ] = [];
+            simpleCellData[ column ][ row ] = {};
             var cellObjs = this.cellData[ gGridId ][ column ][ row ];
 
-            for( var obj = 0; obj < cellObjs.length; obj++ )
+            for ( var objI = 0; objI < cellObjs.length; objI++ )
             {
-                for ( var prop in obj )
+                var propEnding = "";
+                if ( objI > 0 )
                 {
-
-
-                    if ( prop != "objName" && prop.substring( 0, 3 ) == "obj" )
+                    propEnding = objI + 1;
+                }
+                for ( var prop in cellObjs[ objI ] )
+                {
+                    if ( prop.substring( 0, 3 ) == "obj" )
                     {
-
+                        simpleCellData[ column ][ row ][ prop + propEnding ] = cellObjs[ objI ][ prop ];
                     }
                 }
             }
         }
     }
+    return simpleCellData;
         
 }
 
@@ -643,6 +648,7 @@ game.prototype.gObject.prototype.action = function( cellData, arg )
     {
         this.arg.depth = 0;
         this.firstAction = true;
+        this.game.cellDataUndo = this.game.getSimpleCellData( this.gGridId );
     }
     if ( !this.arg.hasOwnProperty("removeObjects") )
     {
