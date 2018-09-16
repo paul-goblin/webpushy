@@ -69,7 +69,6 @@ var gameFunctions = {
                 });
             }
         }
-        
     },
 
     levelLoadAction : function( game, gGridId )
@@ -107,7 +106,7 @@ var gameFunctions = {
     ballAction : function( cellData, gObject, arg )
     {
         var success = false;
-        if ( arg.depth == 1 )
+        if ( arg.requestingObject.objName == "pushy" )
         {
             success = gObject.move( arg.direction );
         }
@@ -118,9 +117,45 @@ var gameFunctions = {
     boxAction : function( cellData, gObject, arg )
     {
         var success = false;
-        if ( arg.depth == 1 )
+        if ( arg.requestingObject.objName == "pushy" || arg.requestingObject.objName == "slime" )
         {
             success = gObject.move( arg.direction );
+        }
+
+        return success;
+    },
+
+    slimeAction : function( cellData, gObject, arg )
+    {
+        var success = false;
+        if ( arg.requestingObject.objName == "pushy" )
+        {
+            success = gObject.move( arg.direction );
+        }
+        if ( success )
+        {
+            if ( arg.direction == "Up" || arg.direction == "Down" )
+            {
+                cellData[ ( gObject.oldColumn + 1 ) % 16 ][ gObject.oldRow ].forEach( function( element )
+                {
+                    element.action( cellData, arg );
+                });
+                cellData[ ( gObject.oldColumn + 15 ) % 16 ][ gObject.oldRow ].forEach( function( element )
+                {
+                    element.action( cellData, arg );
+                });
+            }
+            else
+            {
+                cellData[ gObject.oldColumn ][ ( gObject.oldRow + 1 ) % 12 ].forEach( function( element )
+                {
+                    element.action( cellData, arg );
+                });
+                cellData[ gObject.oldColumn ][ ( gObject.oldRow + 11 ) % 12 ].forEach( function( element )
+                {
+                    element.action( cellData, arg );
+                });
+            }
         }
 
         return success;

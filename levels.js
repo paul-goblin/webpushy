@@ -8,13 +8,17 @@ var loadLevels = function()
 
     g.lvlStart.field[l][10][4].objName = "pushy";
     g.lvlStart.field[l][1][10].objName = "house";
-    g.lvlStart.field[l][10][7].objName = "box";
+    g.lvlStart.field[l][1][4].objName = "box";
     g.lvlStart.field[l][9][7].objName = "wall";
+    g.lvlStart.field[l][1][1].objName = "slime";
+    g.lvlStart.field[l][2][2].objName = "slime";
 
     g.lvlStart.field[l][8][3] = {objName : "oneWay", objType : "up"};   
     g.lvlStart.field[l][9][4] = {objName : "oneWay", objType : "left"}; 
     g.lvlStart.field[l][10][5] = {objName : "oneWay", objType : "right"};
     g.lvlStart.field[l][11][6] = {objName : "oneWay", objType : "down"};
+
+
 
 
 //************************************************************************************************************************************************************************************************************************
@@ -598,8 +602,82 @@ var loadLevels = function()
 
     g.lvlStart.field[l][10][6].objName = "apple";
 
-}
 
+
+//************************************************************************************************************************************************************************************************************************
+    var l = 11;
+//************************************************************************************************************************************************************************************************************************
+    //border
+    for ( var c = 0; c < 16 ; c ++ ) 
+    {
+        g.lvlStart.field[l][c][0].objName = "wall";
+        g.lvlStart.field[l][c][11].objName = "wall";
+    }
+    for ( var r = 0; r < 12; r++ )
+    {
+        g.lvlStart.field[l][0][r].objName = "wall";
+        g.lvlStart.field[l][15][r].objName = "wall";
+    }
+
+    //Pushy + Haus
+    g.lvlStart.field[l][14][1].objName = "pushy";
+    g.lvlStart.field[l][1][10].objName = "house";
+
+    //other
+    g.lvlStart.field[l][9][1].objName = "wall";
+    g.lvlStart.field[l][9][2].objName = "wall";
+    g.lvlStart.field[l][9][3].objName = "wall";
+    g.lvlStart.field[l][10][3].objName = "wall";
+    g.lvlStart.field[l][11][3].objName = "wall";
+    g.lvlStart.field[l][3][8].objName = "wall";
+    g.lvlStart.field[l][2][8].objName = "wall";
+    g.lvlStart.field[l][1][8].objName = "wall";
+    g.lvlStart.field[l][13][8].objName = "wall";
+    g.lvlStart.field[l][13][7].objName = "wall";
+    g.lvlStart.field[l][13][6].objName = "wall";
+    g.lvlStart.field[l][13][5].objName = "wall";
+    g.lvlStart.field[l][13][4].objName = "wall";
+    g.lvlStart.field[l][14][4].objName = "wall";
+
+    g.lvlStart.field[l][10][2].objName = "portal";
+    g.lvlStart.field[l][1][9].objName = "portal";
+
+    g.lvlStart.field[l][7][10].objName = "boxField";
+    g.lvlStart.field[l][9][9].objName = "boxField";
+    g.lvlStart.field[l][11][8].objName = "boxField";
+    g.lvlStart.field[l][12][6].objName = "boxField";
+    g.lvlStart.field[l][14][5].objName = "boxField";
+
+    g.lvlStart.field[l][3][9].objName = "slime";
+
+    g.lvlStart.field[l][4][10].objName = "box";
+    g.lvlStart.field[l][14][6].objName = "box";
+    g.lvlStart.field[l][1][1].objName = "box";
+    g.lvlStart.field[l][2][2].objName = "box";
+    g.lvlStart.field[l][3][3].objName = "box";
+
+
+
+    g.lvlStart.field[l][14][8] = {objName : "lever", objActive : false};
+    g.lvlStart.field[l][14][7] = {objName : "leverWall", objType : "closed"};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 var std = function()
 {

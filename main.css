@@ -143,6 +143,16 @@ br
     height: 100%;
 }
 
+.gGrid.IDfield .cellStyleDiv.slime::after
+{
+	content: "";
+	background-image: url( "cell_pictures/slime.jpg" ) ;
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
 .gGrid.IDfield .cellStyleDiv.red.ball::after
 {
 	content: "";
@@ -334,4 +344,8 @@ br
 	display: inline-block;
     width: 90%; 
     height: 90%;
+}
+.gGrid.IDfield .cellStyleDiv.pushy.oneWay
+{
+	transform: rotate( 0deg );
 }
