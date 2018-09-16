@@ -26,6 +26,8 @@ var gameFunctions = {
 
     toLevelSelect : function()
     {
+        console.log ( g.updateLevelSelections() );
+        g.updateLevelSelections();
         g.changeScreens( "levelSelect" );
     },
 
@@ -69,11 +71,26 @@ var gameFunctions = {
                 });
             }
         }
+        if ( startObject.game.gObjects.hasOwnProperty( "slime" ) )
+        {
+            startObject.game.gObjects.slime.forEach( function( element )
+            {
+                element.triggerd = false;
+            });
+        }
     },
 
     levelLoadAction : function( game, gGridId )
     {
         game.labels.level.innerHTML = "Level " + game.nextLevel.field;
+
+        if ( game.gObjects.hasOwnProperty( "slime" ) )
+        {
+            game.gObjects.slime.forEach( function( element )
+            {
+                element.triggerd = false;
+            });
+        }
     },
 
     wallAction : function()
@@ -128,18 +145,27 @@ var gameFunctions = {
     slimeAction : function( cellData, gObject, arg )
     {
         var success = false;
-        if ( arg.requestingObject.objName == "pushy" )
+
+        if ( gObject.triggerd )
+        {
+            return false;
+        }
+        gObject.triggerd = true;
+
+        if ( arg.requestingObject.objName == "pushy" || arg.requestingObject.objName == "slime" )
         {
             success = gObject.move( arg.direction );
         }
         if ( success )
         {
+            arg.requestingObject = gObject;
             if ( arg.direction == "Up" || arg.direction == "Down" )
             {
                 cellData[ ( gObject.oldColumn + 1 ) % 16 ][ gObject.oldRow ].forEach( function( element )
                 {
                     element.action( cellData, arg );
                 });
+                arg.requestingObject = gObject;
                 cellData[ ( gObject.oldColumn + 15 ) % 16 ][ gObject.oldRow ].forEach( function( element )
                 {
                     element.action( cellData, arg );
@@ -151,6 +177,7 @@ var gameFunctions = {
                 {
                     element.action( cellData, arg );
                 });
+                arg.requestingObject = gObject;
                 cellData[ gObject.oldColumn ][ ( gObject.oldRow + 11 ) % 12 ].forEach( function( element )
                 {
                     element.action( cellData, arg );
@@ -239,15 +266,15 @@ var gameFunctions = {
     waterAction : function( cellData, gObject, arg)
     {
         var success = false;
-        if ( arg.requestingObject.objName == "box")
+        if ( arg.requestingObject.objName == "box" && !gObject.objActive )
         {
         	success = true;
         	gObject.objActive = true;
-        	gObject.objType = "open";	
+        	gObject.objType = "open";
         	arg.removeObjects.push( arg.requestingObject );
         	
         }
-        if( gObject.objActive == true)
+        if( gObject.objActive )
         {
         	success = true;
         }

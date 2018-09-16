@@ -9,6 +9,7 @@ var loadLevels = function()
     g.lvlStart.field[l][10][4].objName = "pushy";
     g.lvlStart.field[l][1][10].objName = "house";
     g.lvlStart.field[l][1][4].objName = "box";
+    g.lvlStart.field[l][2][4].objName = "box";
     g.lvlStart.field[l][9][7].objName = "wall";
     g.lvlStart.field[l][1][1].objName = "slime";
     g.lvlStart.field[l][2][2].objName = "slime";
@@ -639,6 +640,7 @@ var loadLevels = function()
     g.lvlStart.field[l][13][5].objName = "wall";
     g.lvlStart.field[l][13][4].objName = "wall";
     g.lvlStart.field[l][14][4].objName = "wall";
+    g.lvlStart.field[l][3][10].objName = "wall";
 
     g.lvlStart.field[l][10][2].objName = "portal";
     g.lvlStart.field[l][1][9].objName = "portal";
@@ -653,7 +655,7 @@ var loadLevels = function()
 
     g.lvlStart.field[l][4][10].objName = "box";
     g.lvlStart.field[l][14][6].objName = "box";
-    g.lvlStart.field[l][1][1].objName = "box";
+    g.lvlStart.field[l][4][4].objName = "box";
     g.lvlStart.field[l][2][2].objName = "box";
     g.lvlStart.field[l][3][3].objName = "box";
 

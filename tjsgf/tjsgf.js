@@ -38,6 +38,26 @@ var game = function()
     return this;
 }
 
+game.prototype.setMaxLevel = function( gGridId, level )
+{
+    if ( typeof level == "number" )
+    {
+        this.maxLevel[ gGridId ] = level;
+        localStorage.setItem( "maxLevel_" + gGridId, this.maxLevel[ gGridId ] );
+        return "you're max level is " + level + " now";
+    }
+}
+
+game.prototype.setCurrentLevel = function( gGridId, level )
+{
+    if ( typeof level == "number" )
+    {
+        this.nextLevel[ gGridId ] = level;
+        localStorage.setItem( "currentLevel_" + gGridId, this.nextLevel[ gGridId ] );
+        return "you're current level is " + level + " now";
+    }
+}
+
 game.prototype.setupButtons = function()
 {
     var gButtonsCollection = document.querySelectorAll( '.gButton' );
@@ -126,7 +146,7 @@ game.prototype.setupLevelSelections = function()
         gLevelSelection.appendChild( div );
         gLevelSelection.querySelector( ".selectedLevel" ).textContent = "Level " + ( this.nextLevel[ gGridId ] - 1 );
 
-        for ( var level = 0; level  < this.getClassValueFromClassName( this.grids[ gGridId ], "LEVELS", 0 ); level++ )
+        for ( var level = 1; level <= this.maxLevel[ gGridId ]; level++ )
         {
             var levelListEntry = document.createElement( 'li' );
 
@@ -151,6 +171,43 @@ game.prototype.setupLevelSelections = function()
 
     return this;
 }
+
+game.prototype.updateLevelSelections = function()
+{
+    for ( var gLevelSelectionId in this.levelSelections )
+    {
+        var levelList = document.createElement( 'ul' );
+        var div = document.createElement( 'div' );
+        div.classList.add( "selectedLevel" )
+        levelList.classList.add("hide");
+        var activeLevelSelectionsIndex = this.activeLevelSelections.indexOf( gLevelSelectionId );
+        this.activeLevelSelections.splice( activeLevelSelectionsIndex, 1 );
+
+        var gLevelSelection = this.levelSelections[ gLevelSelectionId ];
+        var gGridId = this.getClassValueFromClassName( gLevelSelection, "GRID" )
+        gLevelSelection.innerHTML = "";
+
+        gLevelSelection.appendChild( div );
+        gLevelSelection.querySelector( ".selectedLevel" ).textContent = "Level " + ( this.nextLevel[ gGridId ] - 1 );
+
+        for ( var level = 1; level <= this.maxLevel[ gGridId ]; level++ )
+        {
+            var levelListEntry = document.createElement( 'li' );
+
+            levelListEntry.textContent = "Level " + level;
+
+            (function( gLevelSelectionIdCopy, gGridIdCopy, thisCopy, levelListEntryCopy)
+            {
+                var levelCopy = level;
+                levelListEntryCopy.addEventListener( 'click', function(){ return thisCopy.levelListEntryClick( gLevelSelectionIdCopy, gGridIdCopy, levelCopy ) } ) ;
+            })(gLevelSelectionId, gGridId, this, levelListEntry);
+
+            levelList.appendChild( levelListEntry );
+        }
+        gLevelSelection.appendChild( levelList );
+    }
+}
+
 
 game.prototype.levelSelectionClick = function( gLevelSelectionId, gGridId )
 {
