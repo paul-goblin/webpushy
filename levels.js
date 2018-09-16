@@ -18,6 +18,7 @@ var loadLevels = function()
     g.lvlStart.field[l][10][5] = {objName : "oneWay", objType : "right"};
     g.lvlStart.field[l][11][6] = {objName : "oneWay", objType : "down"};
 
+    g.lvlStart.field[l][4][8] = {objName : "water", objType : "closed"};
 
 
 

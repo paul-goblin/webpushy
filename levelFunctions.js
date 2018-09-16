@@ -236,6 +236,24 @@ var gameFunctions = {
         return success;
     },
 
+    waterAction : function( cellData, gObject, arg)
+    {
+        var success = false;
+        if ( arg.requestingObject.objName == "box")
+        {
+        	success = true;
+        	gObject.objActive = true;
+        	gObject.objType = "open";	
+        	arg.removeObjects.push( arg.requestingObject );
+        	
+        }
+        if( gObject.objActive == true)
+        {
+        	success = true;
+        }
+        return success;
+    },
+
     forbiddenTriggerAction : function( cellData, gObject, arg )
     {
         var success = false;
