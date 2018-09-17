@@ -338,12 +338,12 @@ game.prototype.setupGrids = function()
     return this;
 }
 
-game.prototype.setupKeyDownListener = function( gGridId )
+game.prototype.setupSwipeListener = function( gGridId )
 {
     var thisCopy = this;
     var grid = this.grids[ gGridId ];
-    grid.addEventListener( 'touchstart', function(){ return thisCopy.touchStartHandler( event, gGridId ) } );
-    grid.addEventListener( 'touchend', function(){ return thisCopy.touchEndHandler( event, gGridId ) } );
+    grid.addEventListener( 'touchstart', function( event ){ return thisCopy.touchStartHandler( event, gGridId ) } );
+    grid.addEventListener( 'touchend', function( event ){ return thisCopy.touchEndHandler( event, gGridId ) } );
 }
 
 game.prototype.touchStartHandler = function( event, gGridId )
@@ -406,10 +406,10 @@ game.prototype.evalSwipe = function( gGridId )
     }
 }
 
-game.prototype.setupSwipeListener = function( gGridId )
+game.prototype.setupKeyDownListener = function( gGridId )
 {
     var thisCopy = this;
-    document.addEventListener( 'keydown', function(){ return thisCopy.keyDownHandler( event, gGridId ) } );
+    document.addEventListener( 'keydown', function( event ){ return thisCopy.keyDownHandler( event, gGridId ) } );
 }
 
 game.prototype.keyDownHandler = function( event, gGridId )

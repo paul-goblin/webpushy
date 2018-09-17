@@ -5,9 +5,19 @@ body
 	padding: 0;
 	line-height: 2em;
 	position: relative;
-	min-height: 100%;
+	height: 100%;
 	cursor: default;
 	overscroll-behavior: contain;
+	background-color: red;
+	overflow: hidden;
+}
+
+html
+{
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	height: 100%;
 }
 
 br
@@ -22,8 +32,10 @@ br
 
 #wrapper
 {
+	height: 100%;
+	padding: 0;
 	max-width: 1000px;
-	margin: 0 auto;
+	margin: -10px auto;
 	background: #ada;
 	color: #002;
 }
