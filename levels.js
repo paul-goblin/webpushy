@@ -665,6 +665,65 @@ var loadLevels = function()
     g.lvlStart.field[l][14][7] = {objName : "leverWall", objType : "closed"};
 
 
+//************************************************************************************************************************************************************************************************************************
+    var l = 12; // level 12
+//************************************************************************************************************************************************************************************************************************
+    for (var i = 11 - 1; i >= 1; i--) 
+    {
+            g.lvlStart.field[l][i][1].objName = "wall";
+            g.lvlStart.field[l][i][10].objName = "wall";
+            g.lvlStart.field[l][10][i].objName = "wall";
+    }
+    g.lvlStart.field[l][1][1].objName = "wall"; //viereck
+
+    g.lvlStart.field[l][14][7].objName = "pushy";
+    g.lvlStart.field[l][14][1].objName = "house";
+
+    //border
+    for ( var c = 0; c < 16 ; c ++ ) 
+    {
+        g.lvlStart.field[l][c][0].objName = "box";
+        g.lvlStart.field[l][c][11].objName = "box";
+    }
+    for ( var r = 0; r < 12; r++ )
+    {
+        g.lvlStart.field[l][0][r].objName = "box";
+        g.lvlStart.field[l][15][r].objName = "box";
+    }
+
+    g.lvlStart.field[l][4][1] = {};
+    g.lvlStart.field[l][3][1] = {};
+    g.lvlStart.field[l][2][10] = {};
+    g.lvlStart.field[l][1][10] = {};
+    g.lvlStart.field[l][0][5] = {};
+    g.lvlStart.field[l][0][4] = {};
+    g.lvlStart.field[l][14][6].objName = "wall";
+    g.lvlStart.field[l][14][4].objName = "wall";
+    g.lvlStart.field[l][2][4].objName = "wall";
+    g.lvlStart.field[l][2][3].objName = "wall";
+
+    g.lvlStart.field[l][10][2].objName = "forbiddenTrigger";
+    g.lvlStart.field[l][10][9].objName = "forbiddenTrigger";
+
+    g.lvlStart.field[l][3][3] = {objName : "hole", objType : "red"};
+    g.lvlStart.field[l][11][6] = {objName : "ball", objType : "red"};
+    g.lvlStart.field[l][7][3] = {objName : "ball", objType : "red"};
+    g.lvlStart.field[l][6][4] = {objName : "ball", objType : "red"};
+
+    g.lvlStart.field[l][2][5] = {objName : "hole", objType : "green"};
+    g.lvlStart.field[l][6][5] = {objName : "ball", objType : "green"};
+    g.lvlStart.field[l][8][4] = {objName : "ball", objType : "green"};
+    g.lvlStart.field[l][7][8] = {objName : "ball", objType : "green"};
+
+    g.lvlStart.field[l][3][7] = {objName : "hole", objType : "blue"};
+    g.lvlStart.field[l][7][6] = {objName : "ball", objType : "blue"};
+    g.lvlStart.field[l][8][7] = {objName : "ball", objType : "blue"};
+
+    g.lvlStart.field[l][1][10] = {objName : "leverWall", objType : "closed"};
+    g.lvlStart.field[l][11][10] = {objName : "lever", objActive : false};
+
+
+
 
 
 

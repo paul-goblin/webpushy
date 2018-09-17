@@ -55,6 +55,7 @@ game.prototype.setCurrentLevel = function( gGridId, level )
     {
         this.nextLevel[ gGridId ] = level;
         localStorage.setItem( "currentLevel_" + gGridId, this.nextLevel[ gGridId ] );
+        this.loadNextLevel( gGridId );
         return "you're current level is " + level + " now";
     }
 }

@@ -290,8 +290,9 @@ var gameFunctions = {
             success = true;
             arg.removeObjects.push( gObject );
             arg.addObjects.push( {gObject : "forbidden", column: gObject.column, row: gObject.row} );
-            arg.requestingObject.objType = "forbiddenPushy";
+            arg.requestingObject.forbiddenPushy = true;
         }
+        success = true;
 
         return success;
     },
@@ -314,7 +315,7 @@ var gameFunctions = {
         gObject.objType = "facing" + arg.direction;
         var success = gObject.move( arg.direction );
 
-        if ( success && gObject.objType == "forbiddenPushy" && cellData[ gObject.column ][ gObject.row ].length == 0 )
+        if ( success && gObject.forbiddenPushy && cellData[ gObject.column ][ gObject.row ].length == 0 )
         {
             arg.addObjects.push( {gObject : "forbidden", column: gObject.column, row: gObject.row} );
         }
