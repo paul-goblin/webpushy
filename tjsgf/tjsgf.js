@@ -21,6 +21,7 @@ var game = function()
 
     this.cellData = {};
     this.cellDataUndo = {};
+    this.justChangedLevel = {};
 
     this.gObjects = {};
     this.keyDownEffectedObjects = {};
@@ -264,6 +265,7 @@ game.prototype.setupGrids = function()
         this.styleCells[ gGridId ] = [];
         this.cellData[ gGridId ] = [];
         this.cellDataUndo[ gGridId ] = [];
+        this.justChangedLevel[ gGridId ] = false;
 
         columns = this.getClassValueFromClassName( gGridsCollection[i], "COLUMNS" );
         rows = this.getClassValueFromClassName( gGridsCollection[i], "ROWS" );
@@ -435,8 +437,11 @@ game.prototype.keyDownHandler = function( event, gGridId )
 
 game.prototype.undo = function( gGridId )
 {
-    this.loadIntoCellData( gGridId, this.cellDataUndo )
-    this.renderGrid( gGridId );
+    if ( !this.justChangedLevel[ gGridId ] )
+    {
+        this.loadIntoCellData( gGridId, this.cellDataUndo )
+        this.renderGrid( gGridId );
+    }
 }
 
 game.prototype.setupTools = function()
@@ -581,6 +586,7 @@ game.prototype.loadNextLevel = function( gGridId )
     }
 
     this.renderGrid( gGridId );
+    this.justChangedLevel[ gGridId ] = true;
     this.nextLevel[ gGridId ]++;
 }
 
@@ -802,6 +808,9 @@ game.prototype.gObject.prototype.afterActions = function()
         this.game.cellData[ this.gGridId ][ positionObjectProps.column ][ positionObjectProps.row ].push( positionObjectProps.gObject );
 
     }
+
+    this.game.justChangedLevel[ this.gGridId ] = false;
+
     if ( this.arg.loadNextLevel )
     {
         this.game.loadNextLevel.call( this.game, this.gGridId );
