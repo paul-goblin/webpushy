@@ -702,6 +702,7 @@ var loadLevels = function()
     g.lvlStart.field[l][2][4].objName = "wall";
     g.lvlStart.field[l][2][3].objName = "wall";
 
+    g.lvlStart.field[l][14][5] = {objName : "oneWay", objType : "left"};
     g.lvlStart.field[l][10][2].objName = "forbiddenTrigger";
     g.lvlStart.field[l][10][9].objName = "forbiddenTrigger";
 
@@ -721,6 +722,87 @@ var loadLevels = function()
 
     g.lvlStart.field[l][1][10] = {objName : "leverWall", objType : "closed"};
     g.lvlStart.field[l][11][10] = {objName : "lever", objActive : false};
+
+
+
+//************************************************************************************************************************************************************************************************************************
+    var l = 13; // level 12
+//************************************************************************************************************************************************************************************************************************
+    for (var i = 11 - 1; i >= 1; i--) 
+    {
+        g.lvlStart.field[l][1][i] = {objName : "water", objType : "closed"};
+        g.lvlStart.field[l][i][1].objName = "wall";
+        g.lvlStart.field[l][i][10].objName = "wall";
+        g.lvlStart.field[l][10][i].objName = "wall";
+        g.lvlStart.field[l][6][i].objName = "wall";
+        g.lvlStart.field[l][3][i].objName = "wall";
+    }
+    g.lvlStart.field[l][6][6] = {};
+    g.lvlStart.field[l][7][7].objName = "wall";
+    g.lvlStart.field[l][8][7].objName = "wall";
+    g.lvlStart.field[l][7][2].objName = "wall";
+    g.lvlStart.field[l][9][4].objName = "wall";
+    g.lvlStart.field[l][5][8].objName = "wall";
+    g.lvlStart.field[l][5][4].objName = "wall";
+    g.lvlStart.field[l][3][6] = {};
+    g.lvlStart.field[l][13][2].objName = "wall";
+    g.lvlStart.field[l][13][3].objName = "wall";
+    g.lvlStart.field[l][13][4].objName = "wall";
+    g.lvlStart.field[l][13][5].objName = "wall";
+    g.lvlStart.field[l][14][2].objName = "wall";
+    g.lvlStart.field[l][15][2].objName = "wall";
+
+
+    g.lvlStart.field[l][14][7].objName = "pushy";
+    g.lvlStart.field[l][9][2].objName = "house";
+
+    //border
+    for ( var c = 0; c < 16 ; c ++ ) 
+    {
+        g.lvlStart.field[l][c][0].objName = "box";
+        g.lvlStart.field[l][c][11].objName = "box";
+    }
+    for ( var r = 0; r < 12; r++ )
+    {
+        g.lvlStart.field[l][0][r].objName = "box";
+    }
+
+    g.lvlStart.field[l][7][8].objName = "portal";
+    g.lvlStart.field[l][11][10].objName = "portal";
+
+    g.lvlStart.field[l][9][7].objName = "slime";
+    g.lvlStart.field[l][8][2].objName = "slime";
+    g.lvlStart.field[l][8][8].objName = "box";
+    g.lvlStart.field[l][8][9].objName = "boxField";
+    g.lvlStart.field[l][8][3] = {objName : "water", objType : "closed"};
+    g.lvlStart.field[l][9][10] = {objName : "oneWay", objType : "down"};
+    g.lvlStart.field[l][9][11] = {objName : "oneWay", objType : "down"};
+    g.lvlStart.field[l][8][11] = {objName : "oneWay", objType : "left"};
+    g.lvlStart.field[l][8][0] = {objName : "oneWay", objType : "down"};
+    g.lvlStart.field[l][8][1] = {objName : "oneWay", objType : "down"};
+
+    g.lvlStart.field[l][5][7].objName = "box";
+    g.lvlStart.field[l][5][5].objName = "box";
+    g.lvlStart.field[l][4][3] = {objName : "water", objType : "closed"};
+
+    g.lvlStart.field[l][4][4] = {objName : "leverWall", objType : "closed"};
+    g.lvlStart.field[l][4][9] = {objName : "lever", objActive : false};
+
+    g.lvlStart.field[l][5][3].objName = "apple";
+    g.lvlStart.field[l][5][2].objName = "apple";
+    g.lvlStart.field[l][4][2].objName = "apple";
+
+    g.lvlStart.field[l][12][1].objName = "box";
+    g.lvlStart.field[l][12][2].objName = "slime";
+    g.lvlStart.field[l][12][3].objName = "slime";
+    g.lvlStart.field[l][12][4].objName = "slime";
+    g.lvlStart.field[l][12][5].objName = "slime";
+    g.lvlStart.field[l][11][1].objName = "boxField";
+
+    g.lvlStart.field[l][15][1] = {objName : "hole", objType : "blue"};
+    g.lvlStart.field[l][14][1] = {objName : "ball", objType : "blue"};
+
+
 
 
 

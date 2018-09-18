@@ -26,7 +26,6 @@ var gameFunctions = {
 
     toLevelSelect : function()
     {
-        console.log ( g.updateLevelSelections() );
         g.updateLevelSelections();
         g.changeScreens( "levelSelect" );
     },
