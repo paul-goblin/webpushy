@@ -44,7 +44,7 @@ game.prototype.setMaxLevel = function( gGridId, level )
     if ( typeof level == "number" )
     {
         this.maxLevel[ gGridId ] = level;
-        localStorage.setItem( "maxLevel_" + gGridId, this.maxLevel[ gGridId ] );
+        this.setVar( "maxLevel_" + gGridId, this.maxLevel[ gGridId ] );
         return "you're max level is " + level + " now";
     }
 }
@@ -54,7 +54,7 @@ game.prototype.setCurrentLevel = function( gGridId, level )
     if ( typeof level == "number" )
     {
         this.nextLevel[ gGridId ] = level;
-        localStorage.setItem( "currentLevel_" + gGridId, this.nextLevel[ gGridId ] );
+        this.setVar( "currentLevel_" + gGridId, this.nextLevel[ gGridId ] );
         this.loadNextLevel( gGridId );
         return "you're current level is " + level + " now";
     }
@@ -289,8 +289,8 @@ game.prototype.setupGrids = function()
             this.lvlStart[ gGridId ] = [];
             this.nextLevel[ gGridId ] = 1;
             this.maxLevel[ gGridId ] = 1;
-            var savedLevel = localStorage.getItem( "currentLevel_" + gGridId );
-            var savedMaxLevel = localStorage.getItem( "maxLevel_" + gGridId );
+            var savedLevel = this.getVar( "currentLevel_" + gGridId );
+            var savedMaxLevel = this.getVar( "maxLevel_" + gGridId );
             if ( savedLevel != undefined )
             {
                 this.nextLevel[ gGridId ] = savedLevel;
@@ -579,11 +579,11 @@ game.prototype.loadNextLevel = function( gGridId )
         window.gameFunctions.levelLoadAction( this, gGridId );
     }
 
-    localStorage.setItem( "currentLevel_" + gGridId, this.nextLevel[ gGridId ] );
+    this.saveVar( "currentLevel_" + gGridId, this.nextLevel[ gGridId ] );
     if ( this.nextLevel[ gGridId ] > this.maxLevel[ gGridId ] )
     {
         this.maxLevel[ gGridId ] = this.nextLevel[ gGridId ];
-        localStorage.setItem( "maxLevel_" + gGridId, this.maxLevel[ gGridId ] );
+        this.saveVar( "maxLevel_" + gGridId, this.maxLevel[ gGridId ] );
     }
 
     this.renderGrid( gGridId );
@@ -879,7 +879,16 @@ game.prototype.gObject.prototype.classListAdd = function( classToAdd )
 
 
 
+game.prototype.saveVar = function( variable, value )
+{
+    localStorage.setItem( variable, value );
+}
 
+game.prototype.getVar = function( variable )
+{
+    var value = localStorage.getItem( variable );
+    return value;
+}
 
 game.prototype.getClassValueFromClassName = function( target, classType = "ID", elseReturn )
 {

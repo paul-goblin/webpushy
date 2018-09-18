@@ -195,7 +195,10 @@ var gameFunctions = {
         {
             arg.removeObjects.push( arg.requestingObject );
         }
-        success = true;
+        else if ( arg.requestingObject.objName != "ball" )
+        {
+            success = true;
+        }
 
         return success;
     },
@@ -289,7 +292,7 @@ var gameFunctions = {
             success = true;
             arg.removeObjects.push( gObject );
             arg.addObjects.push( {gObject : "forbidden", column: gObject.column, row: gObject.row} );
-            arg.requestingObject.forbiddenPushy = true;
+            arg.requestingObject.objForbidden = true;
         }
         success = true;
 
@@ -314,7 +317,7 @@ var gameFunctions = {
         gObject.objType = "facing" + arg.direction;
         var success = gObject.move( arg.direction );
 
-        if ( success && gObject.forbiddenPushy && cellData[ gObject.column ][ gObject.row ].length == 0 )
+        if ( success && gObject.objForbidden && cellData[ gObject.column ][ gObject.row ].length == 0 )
         {
             arg.addObjects.push( {gObject : "forbidden", column: gObject.column, row: gObject.row} );
         }
