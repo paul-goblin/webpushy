@@ -77,6 +77,15 @@ var gameFunctions = {
                 element.triggerd = false;
             });
         }
+
+        if ( window.gameFunctions.levelDone( startObject.game, startObject.gGridId ) )
+        {
+            startObject.game.gObjects.house.forEach( function( element )
+            {
+                element.objType = "";
+            });
+        }
+
     },
 
     levelLoadAction : function( game, gGridId )
@@ -90,6 +99,64 @@ var gameFunctions = {
                 element.triggerd = false;
             });
         }
+
+        if ( !window.gameFunctions.levelDone( game, gGridId ) )
+        {
+            game.gObjects.house.forEach( function( element )
+            {
+                element.objType = "blocked";
+            });
+        }
+
+
+    },
+
+    levelDone : function( game, gGridId )
+    {
+            var objNameArray = [ "ball", "apple", ];
+            var objExists = false;
+
+            for ( var i = 0; i < objNameArray.length; i++ )
+            {
+                if ( game.gObjects.hasOwnProperty( objNameArray[i] ) )
+                {
+                    if ( game.gObjects[ objNameArray[i] ].length != 0  )
+                    {
+                        objExists = true;
+                    }
+                }
+            }
+
+            if ( game.gObjects.hasOwnProperty( "boxField" ) )
+            {
+                for ( var i = 0; i < game.gObjects.boxField.length; i++ )
+                {
+                    var element = game.gObjects.boxField[ i ];
+                    var boxFieldCellEntries = game.cellData[ gGridId ][ element.column ][ element.row ];
+                    if ( boxFieldCellEntries.length == 1 )
+                    {
+                        objExists = true;
+                    }
+                    else
+                    {
+                        for ( var objI = 0; objI < boxFieldCellEntries.length; objI++ )
+                        {
+                            if ( boxFieldCellEntries[ objI ].objName != "box" && boxFieldCellEntries[ objI ].objName != "boxField" )
+                            {
+                                objExists = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            if ( !objExists )
+            {
+                return true;
+            }
+
+            return false;
     },
 
     wallAction : function()
@@ -194,6 +261,7 @@ var gameFunctions = {
         if ( arg.requestingObject.objName == "ball" && arg.requestingObject.objType == gObject.objType )
         {
             arg.removeObjects.push( arg.requestingObject );
+            success = true;
         }
         else if ( arg.requestingObject.objName != "ball" )
         {
@@ -330,45 +398,7 @@ var gameFunctions = {
         var success = false;
         if ( arg.requestingObject.objName == "pushy" )
         {
-            var objNameArray = [ "ball", "apple", ];
-            var objExists = false;
-
-            for ( var i = 0; i < objNameArray.length; i++ )
-            {
-                if ( gObject.game.gObjects.hasOwnProperty( objNameArray[i] ) )
-                {
-                    if ( gObject.game.gObjects[ objNameArray[i] ].length != 0  )
-                    {
-                        objExists = true;
-                    }
-                }
-            }
-
-            if ( gObject.game.gObjects.hasOwnProperty( "boxField" ) )
-            {
-                for ( var i = 0; i < gObject.game.gObjects.boxField.length; i++ )
-                {
-                    var element = gObject.game.gObjects.boxField[ i ];
-                    var boxFieldCellEntries = cellData[ element.column ][ element.row ];
-                    if ( boxFieldCellEntries.length == 1 )
-                    {
-                        objExists = true;
-                    }
-                    else
-                    {
-                        for ( var objI = 0; objI < boxFieldCellEntries.length; objI++ )
-                        {
-                            if ( boxFieldCellEntries[ objI ].objName != "box" && boxFieldCellEntries[ objI ].objName != "boxField" )
-                            {
-                                objExists = true;
-                            }
-                        }
-                    }
-                }
-            }
-
-
-            if ( !objExists )
+            if ( window.gameFunctions.levelDone( gObject.game, gObject.gGridId ) )
             {
                 arg.loadNextLevel = true;
             }

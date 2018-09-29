@@ -21,7 +21,6 @@ var game = function()
 
     this.cellData = {};
     this.cellDataUndo = {};
-    this.justChangedLevel = {};
 
     this.gObjects = {};
     this.keyDownEffectedObjects = {};
@@ -44,7 +43,7 @@ game.prototype.setMaxLevel = function( gGridId, level )
     if ( typeof level == "number" )
     {
         this.maxLevel[ gGridId ] = level;
-        this.setVar( "maxLevel_" + gGridId, this.maxLevel[ gGridId ] );
+        this.saveVar( "maxLevel_" + gGridId, this.maxLevel[ gGridId ] );
         return "you're max level is " + level + " now";
     }
 }
@@ -54,7 +53,7 @@ game.prototype.setCurrentLevel = function( gGridId, level )
     if ( typeof level == "number" )
     {
         this.nextLevel[ gGridId ] = level;
-        this.setVar( "currentLevel_" + gGridId, this.nextLevel[ gGridId ] );
+        this.saveVar( "currentLevel_" + gGridId, this.nextLevel[ gGridId ] );
         this.loadNextLevel( gGridId );
         return "you're current level is " + level + " now";
     }
@@ -266,7 +265,6 @@ game.prototype.setupGrids = function()
         this.styleCells[ gGridId ] = [];
         this.cellData[ gGridId ] = [];
         this.cellDataUndo[ gGridId ] = [];
-        this.justChangedLevel[ gGridId ] = false;
 
         columns = this.getClassValueFromClassName( gGridsCollection[i], "COLUMNS" );
         rows = this.getClassValueFromClassName( gGridsCollection[i], "ROWS" );
@@ -322,7 +320,6 @@ game.prototype.setupGrids = function()
                 {
                     this.styleCells[ gGridId ][ column ] = [];
                     this.cellData[ gGridId ][ column ] = [];
-                    this.cellDataUndo[ gGridId ][ column ] = [];
                 }
 
                 (function(gGridIdCopy){
@@ -332,7 +329,6 @@ game.prototype.setupGrids = function()
                     sizeDiv.addEventListener( 'click', function(){ return window.gameFunctions.handleClickOnCell(  gGridIdCopy, columnCopy, rowCopy, this.querySelector( ".cellStyleDiv" ) ) } );
                     thisCopy.styleCells[ gGridId ][ column ][ row ] = sizeDiv.querySelector( ".cellStyleDiv" );
                     thisCopy.cellData[ gGridId ][ column ][ row ] = [];
-                    thisCopy.cellDataUndo[ gGridId ][ column ][ row ] = {};
                 })(gGridId);
             }
         }
@@ -438,9 +434,9 @@ game.prototype.keyDownHandler = function( event, gGridId )
 
 game.prototype.undo = function( gGridId )
 {
-    if ( !this.justChangedLevel[ gGridId ] )
+    if ( this.cellDataUndo[ gGridId ].length != 0 )
     {
-        this.loadIntoCellData( gGridId, this.cellDataUndo )
+        this.loadIntoCellData( gGridId, this.cellDataUndo[ gGridId ].pop() );
         this.renderGrid( gGridId );
     }
 }
@@ -587,7 +583,7 @@ game.prototype.loadNextLevel = function( gGridId )
     }
 
     this.renderGrid( gGridId );
-    this.justChangedLevel[ gGridId ] = true;
+    this.cellDataUndo[ gGridId ] = [];
     this.nextLevel[ gGridId ]++;
 }
 
@@ -712,7 +708,7 @@ game.prototype.gObject.prototype.action = function( cellData, arg )
     {
         this.arg.depth = 0;
         this.firstAction = true;
-        this.game.cellDataUndo = this.game.getSimpleCellData( this.gGridId );
+        this.game.cellDataUndo[ this.gGridId ].push( this.game.getSimpleCellData( this.gGridId ) );
     }
     if ( !this.arg.hasOwnProperty("removeObjects") )
     {
@@ -809,8 +805,6 @@ game.prototype.gObject.prototype.afterActions = function()
         this.game.cellData[ this.gGridId ][ positionObjectProps.column ][ positionObjectProps.row ].push( positionObjectProps.gObject );
 
     }
-
-    this.game.justChangedLevel[ this.gGridId ] = false;
 
     if ( this.arg.loadNextLevel )
     {
