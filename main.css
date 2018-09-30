@@ -1,6 +1,5 @@
 body
 {
-	background: #f2f2f2;
 	margin: 0;
 	padding: 0;
 	line-height: 2em;
@@ -8,7 +7,7 @@ body
 	height: 100%;
 	cursor: default;
 	overscroll-behavior: none;
-	background-color: green;
+	background-color: #eee;
 	overflow: hidden;
 }
 
@@ -40,6 +39,10 @@ br
 	color: #002;
 	font-family: comic sans MS;
 }
+#wrapper.design2
+{
+	background: #aad;
+}
 
 .gScreen
 {
@@ -49,7 +52,7 @@ br
 	position: relative;
 }
 
-.gScreen.IDmainMenu .startHeader
+.startHeader
 {
 	width: 100%;
 	margin: 10px 0;
@@ -72,24 +75,30 @@ br
 	border-radius: 0 10px 0 10px;
 }
 
-.gButton.IDundoMove, .gButton.IDrestartLevel, .gLabel.IDlevel
+.design2 .gButton, .design2 .gLabel, .design2 .gUserSelection, .design2 .gLevelSelection, .design2 .startHeader
+{
+	background-color: #ddf;
+	border: 5px solid #33f;
+}
+
+.gButton.IDundoMove, .gButton.IDrestartLevel, .gLabel.IDlevel, .gButton.IDundoMove2, .gButton.IDrestartLevel2, .gLabel.IDlevel2
 {
 	width: 32%;
 	margin: 10px 1%;
 	float: left;
 }
 
-.gButton.IDundoMove
+.gButton.IDundoMove, .gButton.IDundoMove2
 {
 	margin: 10px 0 10px 1%;
 }
 
-.gLabel.IDlevel
+.gLabel.IDlevel, .gLabel.IDlevel2
 {
 	margin: 10px 1% 10px 0;
 }
 
-.gLevelSelection.IDlevelSelect ul
+.gLevelSelection.IDlevelSelect ul, .gLevelSelection.IDlevelSelect2 ul
 {
 	margin-left: 0;
 	padding-left: 0;
@@ -103,7 +112,12 @@ br
 	background-color: #cfc;
 }
 
-.gGrid.IDfield
+.design2 .gLevelSelection.IDlevelSelect2 ul li:nth-child( odd )
+{
+	background-color: #ccf;
+}
+
+.gGrid, .gGrid.IDfield2
 {
 	width: 100%;
 	min-height: 20px;
@@ -112,7 +126,7 @@ br
 	border: 5px solid #aaa;
 }
 
-.gGrid.IDfield .cellStyleDiv
+.gGrid .cellStyleDiv, .gGrid.IDfield2 .cellStyleDiv
 {
 	width: 90%;
 	height: 90%;
@@ -121,7 +135,7 @@ br
 	background-color: #eee;
 }
 
-.gGrid.IDfield .cellStyleDiv.wall::after
+.gGrid .cellStyleDiv.wall::after
 {
 	content: "";
 	background-image: url( "cell_pictures/wall.jpg" ) ;
@@ -131,37 +145,68 @@ br
     height: 100%;
 }
 
-.gGrid.IDfield .cellStyleDiv.pushy.facingLeft::after
+.gGrid .cellStyleDiv.pushy.facingLeft::after
 {
 	transform: rotate( 270deg );
 }
 
-.gGrid.IDfield .cellStyleDiv.pushy.facingRight::after
+.gGrid .cellStyleDiv.pushy.facingRight::after
 {
 	transform: rotate( 90deg )
 }
 
-.gGrid.IDfield .cellStyleDiv.pushy.facingUp::after
+.gGrid .cellStyleDiv.pushy.facingUp::after
 {
 	transform: rotate( 0deg );
 }
 
-.gGrid.IDfield .cellStyleDiv.pushy.facingDown::after
+.gGrid .cellStyleDiv.pushy.facingDown::after
 {
 	transform: rotate( 180deg );
 }
 
-.gGrid.IDfield .cellStyleDiv.pushy::after
+.gGrid .cellStyleDiv.pushy::after
 {
 	content: "";
-	background-image: url( "cell_pictures/pushyFacingUp.png" ) ;
+	background-image: url( "cell_pictures/pushyFacingUp.png" );
 	background-size: 100% 100%;
 	float: left;
     width: 100%; 
     height: 100%;
 }
 
-.gGrid.IDfield .cellStyleDiv.box::after
+.gGrid .cellStyleDiv.pushy2.facingLeft::after
+{
+	transform: rotate( 270deg );
+}
+
+.gGrid .cellStyleDiv.pushy2.facingRight::after
+{
+	transform: rotate( 90deg )
+}
+
+.gGrid .cellStyleDiv.pushy2.facingUp::after
+{
+	transform: rotate( 0deg );
+}
+
+.gGrid .cellStyleDiv.pushy2.facingDown::after
+{
+	transform: rotate( 180deg );
+}
+
+.gGrid .cellStyleDiv.pushy2::after
+{
+	content: "";
+	background-image: url( "cell_pictures/pushyFacingUp.png" );
+	filter: invert( 100% );
+	background-size: 100% 100%;
+	float: left;
+    width: 100%; 
+    height: 100%;
+}
+
+.gGrid .cellStyleDiv.box::after
 {
 	content: "";
 	background-image: url( "cell_pictures/box.jpg" ) ;
@@ -171,7 +216,7 @@ br
     height: 100%;
 }
 
-.gGrid.IDfield .cellStyleDiv.slime::after
+.gGrid .cellStyleDiv.slime::after
 {
 	content: "";
 	background-image: url( "cell_pictures/slime.jpg" ) ;
@@ -181,7 +226,7 @@ br
     height: 100%;
 }
 
-.gGrid.IDfield .cellStyleDiv.red.ball::after
+.gGrid .cellStyleDiv.red.ball::after
 {
 	content: "";
 	background-image: url( "cell_pictures/redBall.png" ) ;
@@ -191,7 +236,7 @@ br
     height: 100%;
 }
 
-.gGrid.IDfield .cellStyleDiv.blue.ball::after
+.gGrid .cellStyleDiv.blue.ball::after
 {
 	content: "";
 	background-image: url( "cell_pictures/blueBall.png" ) ;
@@ -201,7 +246,7 @@ br
     height: 100%;
 }
 
-.gGrid.IDfield .cellStyleDiv.green.ball::after
+.gGrid .cellStyleDiv.green.ball::after
 {
 	content: "";
 	background-image: url( "cell_pictures/greenBall.png" ) ;
@@ -211,7 +256,7 @@ br
     height: 100%;
 }
 
-.gGrid.IDfield .cellStyleDiv.red.hole
+.gGrid .cellStyleDiv.red.hole
 {
 	background-image: url( "cell_pictures/redHole.png" ) ;
 	background-size: 100% 100%;
@@ -220,7 +265,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.blue.hole
+.gGrid .cellStyleDiv.blue.hole
 {
 	background-image: url( "cell_pictures/blueHole.png" ) ;
 	background-size: 100% 100%;
@@ -229,7 +274,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.green.hole
+.gGrid .cellStyleDiv.green.hole
 {
 	background-image: url( "cell_pictures/greenHole.png" ) ;
 	background-size: 100% 100%;
@@ -238,7 +283,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.red.colorBlur
+.gGrid .cellStyleDiv.red.colorBlur
 {
 	background-image: url( "cell_pictures/redColorField.png" ) ;
 	background-size: 100% 100%;
@@ -247,7 +292,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.blue.colorBlur
+.gGrid .cellStyleDiv.blue.colorBlur
 {
 	background-image: url( "cell_pictures/blueColorField.png" ) ;
 	background-size: 100% 100%;
@@ -256,7 +301,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.green.colorBlur
+.gGrid .cellStyleDiv.green.colorBlur
 {
 	background-image: url( "cell_pictures/greenColorField.png" ) ;
 	background-size: 100% 100%;
@@ -265,7 +310,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.forbiddenTrigger
+.gGrid .cellStyleDiv.forbiddenTrigger
 {
 	background-image: url( "cell_pictures/forbiddenTrigger.png" ) ;
 	background-size: 100% 100%;
@@ -274,7 +319,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.forbidden
+.gGrid .cellStyleDiv.forbidden
 {
 	background-image: url( "cell_pictures/forbidden.png" ) ;
 	background-size: 100% 100%;
@@ -283,7 +328,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.house
+.gGrid .cellStyleDiv.house
 {
 	background-image: url( "cell_pictures/house.png" ) ;
 	background-size: 100% 100%;
@@ -292,12 +337,27 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.house.blocked
+.gGrid .cellStyleDiv.house2
+{
+	background-image: url( "cell_pictures/house.png" ) ;
+	filter: invert( 100% );
+	background-size: 100% 100%;
+	display: inline-block;
+    width: 90%; 
+    height: 90%;
+}
+
+.gGrid .cellStyleDiv.house.blocked
 {
 	filter: grayscale(50%);
 }
 
-.gGrid.IDfield .cellStyleDiv.apple
+.gGrid .cellStyleDiv.house2.blocked
+{
+	filter: grayscale(50%);
+}
+
+.gGrid .cellStyleDiv.apple
 {
 	background-image: url( "cell_pictures/apple.png" ) ;
 	background-size: 100% 100%;
@@ -306,7 +366,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.portal
+.gGrid .cellStyleDiv.portal
 {
 	background-image: url( "cell_pictures/portal.png" ) ;
 	background-size: 100% 100%;
@@ -315,7 +375,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.lever
+.gGrid .cellStyleDiv.lever
 {
 	background-image: url( "cell_pictures/lever.png" ) ;
 	background-size: 100% 100%;
@@ -324,7 +384,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.leverWall
+.gGrid .cellStyleDiv.leverWall
 {
 	background-image: url( "cell_pictures/leverWall.png" ) ;
 	background-size: 100% 100%;
@@ -333,7 +393,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.leverWall.open
+.gGrid .cellStyleDiv.leverWall.open
 {
 	background-image: url( "cell_pictures/leverWallOpen.png" ) ;
 	background-size: 100% 100%;
@@ -342,7 +402,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.water
+.gGrid .cellStyleDiv.water
 {
 	background-image: url( "cell_pictures/water.png" ) ;
 	background-size: 100% 100%;
@@ -351,7 +411,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.water.open
+.gGrid .cellStyleDiv.water.open
 {
 	background-image: url( "cell_pictures/waterOpen.png" ) ;
 	background-size: 100% 100%;
@@ -360,7 +420,7 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.boxField
+.gGrid .cellStyleDiv.boxField
 {
 	background-image: url( "cell_pictures/boxField.png" ) ;
 	background-size: 100% 100%;
@@ -369,26 +429,26 @@ br
     height: 90%;
 }
 
-.gGrid.IDfield .cellStyleDiv.oneWay.left
+.gGrid .cellStyleDiv.oneWay.left
 {
 	transform: rotate( 270deg );
 }
 
-.gGrid.IDfield .cellStyleDiv.oneWay.right
+.gGrid .cellStyleDiv.oneWay.right
 {	
 	transform: rotate( 90deg );
 }
 
-.gGrid.IDfield .cellStyleDiv.oneWay.up
+.gGrid .cellStyleDiv.oneWay.up
 {	
 	transform: rotate( 0deg );
 }
 
-.gGrid.IDfield .cellStyleDiv.oneWay.down
+.gGrid .cellStyleDiv.oneWay.down
 {	
 	transform: rotate( 180deg );
 }
-.gGrid.IDfield .cellStyleDiv.oneWay
+.gGrid .cellStyleDiv.oneWay
 {	
 	background-image: url( "cell_pictures/oneWayFacingUp.png" ) ;
 	background-size: 100% 100%;
@@ -396,7 +456,7 @@ br
     width: 90%; 
     height: 90%;
 }
-.gGrid.IDfield .cellStyleDiv.pushy.oneWay
+.gGrid .cellStyleDiv.pushy.oneWay
 {
 	transform: rotate( 0deg );
 }

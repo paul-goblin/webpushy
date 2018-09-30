@@ -265,6 +265,7 @@ game.prototype.setupGrids = function()
         this.styleCells[ gGridId ] = [];
         this.cellData[ gGridId ] = [];
         this.cellDataUndo[ gGridId ] = [];
+        this.gObjects[ gGridId ] = {};
 
         columns = this.getClassValueFromClassName( gGridsCollection[i], "COLUMNS" );
         rows = this.getClassValueFromClassName( gGridsCollection[i], "ROWS" );
@@ -391,14 +392,17 @@ game.prototype.evalSwipe = function( gGridId )
         for ( var i = 0; i < this.swipeEffectedObjects.length; i++ )
         {
             var objName = this.swipeEffectedObjects[i];
-            for ( var j = 0; j < this.gObjects[ objName ].length; j++ )
+            if ( this.gObjects[ gGridId ].hasOwnProperty( objName ) )
             {
-                var obj = this.gObjects[ objName ][j]
-                obj.action( this.cellData[ gGridId ], {swipeDirection: swipeDirection} );
-
-                if ( typeof this.gObjects[ objName ] == "undefined" )
+                for ( var j = 0; j < this.gObjects[ gGridId ][ objName ].length; j++ )
                 {
-                    return;
+                    var obj = this.gObjects[ gGridId ][ objName ][j]
+                    obj.action( this.cellData[ gGridId ], {swipeDirection: swipeDirection} );
+
+                    if ( typeof this.gObjects[ gGridId ][ objName ] == "undefined" )
+                    {
+                        return;
+                    }
                 }
             }
         }
@@ -418,14 +422,17 @@ game.prototype.keyDownHandler = function( event, gGridId )
         for ( var i = 0; i < this.keyDownEffectedObjects[ event.key ].length; i++ )
         {
             var objName = this.keyDownEffectedObjects[ event.key ][i];
-            for ( var j = 0; j < this.gObjects[ objName ].length; j++ )
+            if ( this.gObjects[ gGridId ].hasOwnProperty( objName ) )
             {
-                var obj = this.gObjects[ objName ][j];
-                obj.action( this.cellData[ gGridId ], {eventKey: event.key} );
-
-                if ( typeof this.gObjects[ objName ] == "undefined" )
+                for ( var j = 0; j < this.gObjects[ gGridId ][ objName ].length; j++ )
                 {
-                    return;
+                    var obj = this.gObjects[ gGridId ][ objName ][j];
+                    obj.action( this.cellData[ gGridId ], {eventKey: event.key} );
+
+                    if ( typeof this.gObjects[ gGridId ][ objName ] == "undefined" )
+                    {
+                        return;
+                    }
                 }
             }
         }
@@ -589,7 +596,7 @@ game.prototype.loadNextLevel = function( gGridId )
 
 game.prototype.loadIntoCellData = function( gGridId, simpleCellData )
 {
-    this.gObjects = {};
+    this.gObjects[ gGridId ] = {};
     for ( var column = 0; column < this.styleCells[ gGridId ].length; column++ )
     {
         for ( var row = 0; row < this.styleCells[ gGridId ][ column ].length; row++ )
@@ -599,9 +606,9 @@ game.prototype.loadIntoCellData = function( gGridId, simpleCellData )
 
             if ( lvlCell.hasOwnProperty("objName") )
             {
-                if ( !this.gObjects.hasOwnProperty( lvlCell.objName ) )
+                if ( !this.gObjects[ gGridId ].hasOwnProperty( lvlCell.objName ) )
                 {
-                    this.gObjects[ lvlCell.objName ] = [];
+                    this.gObjects[ gGridId ][ lvlCell.objName ] = [];
                 }
 
                 var instance = new this.gObject( lvlCell.objName, column, row, this.renderGrid, gGridId, this );
@@ -614,15 +621,15 @@ game.prototype.loadIntoCellData = function( gGridId, simpleCellData )
                     }
                 }
 
-                this.gObjects[ lvlCell.objName ].push( instance );
+                this.gObjects[ gGridId ][ lvlCell.objName ].push( instance );
                 this.cellData[ gGridId ][ column ][ row ].push( instance );
             }
 
             if ( lvlCell.hasOwnProperty("objName2") )
             {
-                if ( !this.gObjects.hasOwnProperty( lvlCell.objName2 ) )
+                if ( !this.gObjects[ gGridId ].hasOwnProperty( lvlCell.objName2 ) )
                 {
-                    this.gObjects[ lvlCell.objName2 ] = [];
+                    this.gObjects[ gGridId ][ lvlCell.objName2 ] = [];
                 }
 
                 var instance = new this.gObject( lvlCell.objName2, column, row, this.renderGrid, gGridId, this );
@@ -635,7 +642,7 @@ game.prototype.loadIntoCellData = function( gGridId, simpleCellData )
                     }
                 }
 
-                this.gObjects[ lvlCell.objName2 ].push( instance );
+                this.gObjects[ gGridId ][ lvlCell.objName2 ].push( instance );
                 this.cellData[ gGridId ][ column ][ row ].push( instance );
             }
         }
@@ -728,7 +735,7 @@ game.prototype.gObject.prototype.action = function( cellData, arg )
     }
 
     this.cellDataIndex = this.cellData[ this.column ][ this.row ].indexOf( this );
-    this.gObjectsIndex = this.game.gObjects[ this.objName ].indexOf( this );
+    this.gObjectsIndex = this.game.gObjects[ this.gGridId ][ this.objName ].indexOf( this );
 
     if ( typeof window.gameFunctions[ this.objName + "Action" ] === "function" )
     { 
@@ -741,7 +748,7 @@ game.prototype.gObject.prototype.action = function( cellData, arg )
         this.cellData[ this.column ][ this.row ].push( this );
 
         this.cellDataIndex = this.cellData[ this.column ][ this.row ].indexOf( this );
-        this.gObjectsIndex = this.game.gObjects[ this.objName ].indexOf( this );
+        this.gObjectsIndex = this.game.gObjects[ this.gGridId ][ this.objName ].indexOf( this );
 
         this.render.call( this.game, this.gGridId );
     }
@@ -768,15 +775,15 @@ game.prototype.gObject.prototype.afterActions = function()
     {
         var removeObject = this.arg.removeObjects[i];
         this.cellData[ removeObject.column ][ removeObject.row ].splice( removeObject.cellDataIndex, 1 );;
-        this.game.gObjects[ removeObject.objName ].splice( removeObject.gObjectsIndex, 1 );;
+        this.game.gObjects[ this.gGridId ][ removeObject.objName ].splice( removeObject.gObjectsIndex, 1 );;
     }
     for ( var i = 0; i < this.arg.addObjects.length; i++ )
     {
         var addObjectProps = this.arg.addObjects[i];
 
-        if ( !this.game.gObjects.hasOwnProperty( addObjectProps.gObject ) )
+        if ( !this.game.gObjects[ this.gGridId ].hasOwnProperty( addObjectProps.gObject ) )
         {
-            this.game.gObjects[ addObjectProps.gObject ] = [];
+            this.game.gObjects[ this.gGridId ][ addObjectProps.gObject ] = [];
         }
 
         var instance = new this.game.gObject( addObjectProps.gObject, addObjectProps.column, addObjectProps.row, this.game.renderGrid, this.gGridId, this.game );
@@ -789,7 +796,7 @@ game.prototype.gObject.prototype.afterActions = function()
             }
         }
 
-        this.game.gObjects[ addObjectProps.gObject ].push( instance );
+        this.game.gObjects[ this.gGridId ][ addObjectProps.gObject ].push( instance );
         this.game.cellData[ this.gGridId ][ addObjectProps.column ][ addObjectProps.row ].push( instance );
 
     }

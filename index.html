@@ -26,11 +26,13 @@
 <!-- wrapper -->
 <div id="wrapper">
 
+
+	<!-- one Player -->
 	<div class="gScreen TYPEstart IDmainMenu hide">
 		<div class="startHeader">Welcome to WebPushy!</div>
 		<div class="gButton IDtoLevelSelect">Select level</div>
 		<div class="gButton IDstartGame">Continue game</div>
-		<div class="gButton IDstartNewGame">Start new game</div>
+		<div class="gButton IDtoTwoPlayers">Change to two players mode</div>
 	</div>
 
 	<div class="gScreen TYPEdefault IDlevelSelect hide">
@@ -48,13 +50,38 @@
 		<div class="gButton IDtoMainMenu">Back to main menu</div>
 	</div>
 
+	<!-- two Players -->
+	<div class="gScreen TYPEdefault IDmainMenu2 hide">
+		<div class="startHeader">Welcome to WebPushy42!</div>
+		<div class="gButton IDtoLevelSelect2">Select level</div>
+		<div class="gButton IDstartGame2">Continue game</div>
+		<div class="gButton IDtoOnePlayer">Change to one player mode</div>
+	</div>
+
+	<div class="gScreen TYPEdefault IDlevelSelect2 hide">
+		<div class="gLevelSelection IDlevelSelect2 GRIDfield2"></div>
+		<div class="gButton IDstartGame2">Play!</div>
+		<div class="gButton IDtoMainMenu2">Back to main menu</div>
+	</div>
+
+	<div class="gScreen TYPEdefault IDgame2 hide">
+		<div class="gLabel IDlevel2"></div>
+		<div class="gButton IDrestartLevel2">Restart</div>
+		<div class="gButton IDundoMove2">Undo</div>
+		<div class="clear"></div>
+		<div class="gGrid IDfield2 COLUMNS16 ROWS12 LEVELS20 KEYDOWNLISTENERtrue SWIPELISTENERtrue"></div>
+		<div class="gButton IDtoMainMenu2">Back to main menu</div>
+	</div>
+
 <!-- wrapper -->
 </div>
 
 
 <!-- script -->
-<script type="text/javascript" src="levelFunctions.js"></script>
+<script type="text/javascript" src="gameFunctions.js"></script>
 <script type="text/javascript" src="levels.js"></script>
+<script type="text/javascript" src="levels2.js"></script>
+<script type="text/javascript" src="std.js"></script>
 
 </body>
 </html>

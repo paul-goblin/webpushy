@@ -822,28 +822,3 @@ var loadLevels = function()
 
 
 }
-
-var std = function()
-{
-
-    window.g = new game();
-
-    g.setupScreens().setupButtons().setupLabels().setupGrids();
-
-    g.keyDownEffectedObjects.ArrowUp = [ "pushy" ];
-    g.keyDownEffectedObjects.ArrowDown = [ "pushy" ];
-    g.keyDownEffectedObjects.ArrowLeft = [ "pushy" ];
-    g.keyDownEffectedObjects.ArrowRight = [ "pushy" ];
-
-    g.swipeEffectedObjects = [ "pushy" ];
-
-    loadLevels();
-
-    g.loadNextLevel( "field" ); //um test-Level 0 zu überspringen
-
-
-    g.setupLevelSelections(); 
-    
-
-}
-$( document ).ready( std() );
