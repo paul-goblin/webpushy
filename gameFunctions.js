@@ -20,21 +20,12 @@ var gameFunctions = {
         g.undo( "field2" );
     },
 
-    startNewGame : function()
-    {
-        g.nextLevel.field = 1;
-        g.loadNextLevel( "field" );
-        g.changeScreens( "game" );
-    },//old
-
     toTwoPlayers : function()
     {
-        document.querySelector( "#wrapper" ).classList.add( "design2" );
         g.changeScreens( "mainMenu2" );
     },
     toOnePlayer : function()
     {
-        document.querySelector( "#wrapper" ).classList.remove( "design2" );
         g.changeScreens( "mainMenu" );
     },
 
@@ -123,14 +114,14 @@ var gameFunctions = {
                     pushyOnHouse = true;
                 }
             });
-            if ( startObject.gGridId = "field" )
+            if ( startObject.gGridId == "field" )
             {
                 if ( pushyOnHouse )
                 {
                     arg.loadNextLevel = true;
                 }
             }
-            else if ( startObject.gGridId = "field2" )
+            else if ( startObject.gGridId == "field2" )
             {
                 startObject.game.gObjects[ startObject.gGridId ].house2.forEach( function( element )
                 {
@@ -142,7 +133,7 @@ var gameFunctions = {
                 });
                 if ( pushyOnHouse && pushy2OnHouse )
                 {
-                    rg.loadNextLevel = true;
+                    arg.loadNextLevel = true;
                 }
             }
         }

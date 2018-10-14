@@ -7,6 +7,7 @@ var game = function()
     this.inputs = {};
     this.labels = {};
     this.grids = {};
+    this.activeGrids = [];
     this.styleCells = {};
     this.toolbars = {};
     this.tools = {};
@@ -81,6 +82,7 @@ game.prototype.setupScreens = function()
     var gScreensCollection = document.querySelectorAll( '.gScreen' );
     var gScreenId = "";
     var gScreenType = "";
+    var activeStartScreen = this.getVar( "activeStartScreen" );
 
     for (var i = 0; i < gScreensCollection.length; i++)
     {
@@ -89,8 +91,38 @@ game.prototype.setupScreens = function()
         this.screens[ gScreenId ] = gScreensCollection[i];
         if ( gScreenType == "start" )
         {
+            if ( activeStartScreen != null )
+            {
+                if ( activeStartScreen != gScreenId )
+                {
+                    continue;
+                }
+            }
+            var styleTarget = this.getClassValueFromClassName( gScreensCollection[i], "STYLETARGET", "body" );
+            var targetClass = this.getClassValueFromClassName( gScreensCollection[i], "TARGETCLASS", "" );
+            document.querySelector( styleTarget ).className = targetClass;
+
             gScreensCollection[i].classList.remove( "hide" );
             this.shownScreen = gScreenId;
+            this.saveVar( "activeStartScreen", gScreenId );
+        }
+        else if ( gScreenType == "alternativeStart" )
+        {
+            if ( activeStartScreen == null )
+            {
+                continue;
+            }
+            else if ( activeStartScreen != gScreenId )
+            {
+                continue;
+            }
+            var styleTarget = this.getClassValueFromClassName( gScreensCollection[i], "STYLETARGET", "body" );
+            var targetClass = this.getClassValueFromClassName( gScreensCollection[i], "TARGETCLASS", "" );
+            document.querySelector( styleTarget ).className = targetClass;
+
+            gScreensCollection[i].classList.remove( "hide" );
+            this.shownScreen = gScreenId;
+            this.saveVar( "activeStartScreen", gScreenId );
         }
     }
 
@@ -361,6 +393,10 @@ game.prototype.touchEndHandler = function( event, gGridId )
 
 game.prototype.evalSwipe = function( gGridId )
 {
+    if ( !this.activeGrids.includes( gGridId ) )
+    {
+        return false;
+    }
     var swipeDirection = "";
     var swipeRightComponent = this.vars.touchendX - this.vars.touchstartX;
     var swipeUpComponent = this.vars.touchstartY - this.vars.touchendY;
@@ -417,6 +453,10 @@ game.prototype.setupKeyDownListener = function( gGridId )
 
 game.prototype.keyDownHandler = function( event, gGridId )
 {
+    if ( !this.activeGrids.includes( gGridId ) )
+    {
+        return false;
+    }
     if ( this.keyDownEffectedObjects.hasOwnProperty( event.key ) )
     {
         for ( var i = 0; i < this.keyDownEffectedObjects[ event.key ].length; i++ )
@@ -497,6 +537,22 @@ game.prototype.changeScreens = function( newScreen )
     this.screens[ this.shownScreen ].classList.add( "hide" );
     this.screens[ newScreen ].classList.remove( "hide" );
     this.shownScreen = newScreen;
+    this.activeGrids = [];
+    var gScreenType = this.getClassValueFromClassName( this.screens[ newScreen ], "TYPE" );
+    if ( gScreenType == "start" || gScreenType == "alternativeStart" )
+    {
+        this.saveVar( "activeStartScreen", newScreen );
+        var styleTarget = this.getClassValueFromClassName( this.screens[ newScreen ], "STYLETARGET", "body" );
+        var targetClass = this.getClassValueFromClassName( this.screens[ newScreen ], "TARGETCLASS", "" );
+        document.querySelector( styleTarget ).className = targetClass;
+    }
+    for ( var gGridId in this.grids )
+    {
+        if( this.grids[ gGridId ].offsetParent != null )
+        {
+            this.activeGrids.push( gGridId );
+        }
+    }
 }
 
 
@@ -707,6 +763,10 @@ game.prototype.gObject = function( objName, column, row, render, gGridId, game )
 
 game.prototype.gObject.prototype.action = function( cellData, arg )
 {
+    if ( !this.game.activeGrids.includes( this.gGridId ) )
+    {
+        return false;
+    }
     var success = true;
     this.cellData = cellData;
     this.arg = arg;

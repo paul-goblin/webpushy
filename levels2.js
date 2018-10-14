@@ -24,10 +24,33 @@ var loadLevels2 = function()
     }
 
     //Pushys + Hauses
-    // g.lvlStart.field2[l][14][1].objName = "pushy";
-    // g.lvlStart.field2[l][1][10].objName = "house";
-    // g.lvlStart.field2[l][1][1].objName = "pushy2";
-    // g.lvlStart.field2[l][14][10].objName = "house2";
+    g.lvlStart.field2[l][14][1].objName = "pushy";
+    g.lvlStart.field2[l][1][10].objName = "house";
+    g.lvlStart.field2[l][1][1].objName = "pushy2";
+    g.lvlStart.field2[l][14][10].objName = "house2";
+
+    //Walls
+    for ( var c = 3; c < 14 ; c ++ ) 
+    {
+        g.lvlStart.field2[l][c][2].objName = "wall";
+    }
+    for ( var r = 3; r < 11; r++ )
+    {
+        g.lvlStart.field2[l][3][r].objName = "wall";
+        g.lvlStart.field2[l][13][r].objName = "wall";
+        for ( var c = 4; c < 13; c++ )
+        {
+            if ( (c + r) % 2 == 0 )
+            {
+                g.lvlStart.field2[l][c][r] = { objName: "hole", objType: "blue" };
+            }
+            else
+            {
+                g.lvlStart.field2[l][c][r] = { objName: "hole", objType: "green" };
+            }
+        }
+
+    }
 
 
 

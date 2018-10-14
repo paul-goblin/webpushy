@@ -27,6 +27,7 @@ br
 *
 {
 	box-sizing: border-box;
+	user-select: none
 }
 
 #wrapper
